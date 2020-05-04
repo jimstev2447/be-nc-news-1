@@ -6,7 +6,7 @@ exports.up = function (knex) {
   first. The requirements for this table are that it should have a 'slug' field which should take unique strings, which function as primary keys and it should also have a 'description' field which takes a string that gives a brief description of a given topic. 
   */
   console.log(
-    "Created the 'topics' table which has the columns 'slug' and 'description'."
+    "Created the 'topics' table with the columns 'slug' and 'description'."
   );
 
   return knex.schema.createTable("topics", (topicsTable) => {
@@ -17,4 +17,5 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
   console.log("Deleted the 'topics' table.");
+  return knex.schema.dropTable("topics");
 };

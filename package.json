@@ -12,7 +12,7 @@
     "migrate-rollback": "knex migrate:rollback",
     "migrate-up": "knex migrate:up",
     "migrate-down": "knex migrate:down",
-    "migrations-status": "knex migrate:list"
+    "migration-status": "knex migrate:list"
   },
   "repository": {
     "type": "git",
