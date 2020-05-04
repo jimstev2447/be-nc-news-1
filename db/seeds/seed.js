@@ -38,4 +38,4 @@ exports.seed = function (knex) {
     });
 };
 
-console.log("this is : ", articleData);
+console.log(articleData);
