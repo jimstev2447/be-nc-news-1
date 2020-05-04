@@ -7,7 +7,12 @@
     "setup-dbs": "psql -f ./db/setup.sql",
     "seed": "knex seed:run",
     "test": "jest",
-    "make-migration": "knex migrate:make"
+    "make-migration": "knex migrate:make",
+    "migrate-latest": "knex migrate:latest",
+    "migrate-rollback": "knex migrate:rollback",
+    "migrate-up": "knex migrate:up",
+    "migrate-down": "knex migrate:down",
+    "migrations-status": "knex migrate:list"
   },
   "repository": {
     "type": "git",
