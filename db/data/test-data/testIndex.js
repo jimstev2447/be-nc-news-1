@@ -1,8 +1,8 @@
 const testData = {
-  articles: require("./articles"),
-  comments: require("./comments"),
-  topics: require("./topics"),
-  users: require("./users"),
+  articleData: require("./articles"),
+  commentData: require("./comments"),
+  topicData: require("./topics"),
+  userData: require("./users"),
 };
 
 module.exports = testData;
