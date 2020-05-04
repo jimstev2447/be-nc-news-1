@@ -13,6 +13,11 @@ exports.up = function (knex) {
     articlesTable.integer("votes").defaultTo(0);
     articlesTable.text("topic");
     articlesTable.foreign("topic").references("topics.slug");
+    articlesTable.text("author");
+    articlesTable.foreign("author").references("users.username");
+    articlesTable
+      .timestamp("created_at", { precision: 6 })
+      .defaultTo(knex.fn.now(6));
   });
 };
 
