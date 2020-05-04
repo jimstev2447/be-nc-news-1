@@ -5,4 +5,4 @@ const data = {
   test: require("./test-data/test-data-index"),
 };
 
-module.exports = data;
+module.exports = data[ENV];
