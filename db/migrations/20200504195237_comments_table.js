@@ -9,7 +9,9 @@ exports.up = function (knex) {
   return knex.schema.createTable("comments", (commentsTable) => {
     commentsTable.increments("comment_id").primary();
     commentsTable.text("author");
-    commentsTable.text("article_id");
+    commentsTable.foreign("author").references("users.username");
+    commentsTable.integer("article_id");
+    commentsTable.foreign("article_id").references("articles.article_id");
     commentsTable.integer("votes").defaultTo(0);
     commentsTable
       .timestamp("created_at", { precision: 6 })
