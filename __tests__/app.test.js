@@ -6,8 +6,8 @@ const knex = require("../db/data/connection.js");
 
 describe.only("Testing GET methods", () => {
   afterAll(() => knex.destroy());
-  describe.only("Testing GET methods for 'topics'", () => {
-    test.only("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
+  xdescribe("Testing GET methods for 'topics'", () => {
+    test("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
       return request(app)
         .get("/api/topics/")
         .then(({ body: { topics } }) => {
