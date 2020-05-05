@@ -22,7 +22,7 @@ exports.seed = function (knex) {
       // console.log("TOPICS :", data[0]);
       // console.log("USERS :", data[1]);
       // console.log("ARTICLES :", articleData);
-      console.log("Successfully populated table 'users'.");
+      console.log("Successfully populated table 'articles'.");
       return knex("articles").insert(formatDates(articleData)).returning("*");
 
       /* 
@@ -45,7 +45,12 @@ exports.seed = function (knex) {
   */
 
       const articleRef = makeRefObj(articleRows);
-      const formattedComments = formatComments(commentData, articleRef);
-      return knex("comments").insert(formattedComments);
+      return articleRef;
+      // const formattedComments = formatComments(commentData, articleRef);
+      // return knex("comments").insert(formattedComments);
+    })
+    .then((data) => {
+      console.log(data);
+      console.log("COMMENTS :", commentData);
     });
 };

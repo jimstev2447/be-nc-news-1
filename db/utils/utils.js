@@ -12,4 +12,14 @@ exports.makeRefObj = (list) => {
   return refObj;
 };
 
-exports.formatComments = (comments, articleRef) => {};
+exports.formatComments = (comments, articleRef) => {
+  let commentsCopy = comments.map((obj) => ({ ...obj }));
+  commentsCopy.forEach((comment) => {
+    comment["created_at"] = new Date(comment["created_at"]);
+    comment["article_id"] = articleRef[comment["belongs_to"]];
+    comment["author"] = comment["created_by"];
+    delete comment["created_by"];
+    delete comment["belongs_to"];
+  });
+  return commentsCopy;
+};

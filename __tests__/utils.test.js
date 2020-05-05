@@ -18,7 +18,7 @@ xdescribe("formatDates", () => {
     formatDates(list);
     expect(list).toEqual([]);
   });
-  test("it creates a reference object from an array of objects using different arguments", () => {
+  test("it reformates the date to a javascript object", () => {
     const list = [
       {
         title: "Living in the shadow of a great man",
@@ -76,4 +76,60 @@ xdescribe("makeRefObj", () => {
   });
 });
 
-describe("formatComments", () => {});
+xdescribe("formatComments", () => {
+  test("returns an empty array, when passed an empty array", () => {
+    const comments = [];
+    const articleRef = {};
+    const actual = formatComments(comments, articleRef);
+    const expected = [];
+    expect(actual).toEqual(expected);
+  });
+  test("it does not mutate the original list", () => {
+    const comments = [];
+    const articleRef = {};
+    formatComments(comments, articleRef);
+    expect(comments).toEqual([]);
+  });
+  test("it creates a reference object from an array of objects using different arguments", () => {
+    const articleRef = {
+      "Living in the shadow of a great man": 1,
+      "They're not exactly dogs, are they?": 9,
+    };
+    const comments = [
+      {
+        body:
+          "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+        belongs_to: "They're not exactly dogs, are they?",
+        created_by: "butter_bridge",
+        votes: 16,
+        created_at: 1511354163389,
+      },
+      {
+        body:
+          "The beautiful thing about treasure is that it exists. Got to find out what kind of sheets these are; not cotton, not rayon, silky.",
+        belongs_to: "Living in the shadow of a great man",
+        created_by: "butter_bridge",
+        votes: 14,
+        created_at: 1479818163389,
+      },
+    ];
+    expect(formatComments(comments, articleRef)).toEqual([
+      {
+        article_id: 9,
+        author: "butter_bridge",
+        body:
+          "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+        created_at: new Date(1511354163389),
+        votes: 16,
+      },
+      {
+        article_id: 1,
+        author: "butter_bridge",
+        body:
+          "The beautiful thing about treasure is that it exists. Got to find out what kind of sheets these are; not cotton, not rayon, silky.",
+        created_at: new Date(1479818163389),
+        votes: 14,
+      },
+    ]);
+  });
+});
