@@ -19,9 +19,6 @@ exports.seed = function (knex) {
       return Promise.all([topicsInsertions, usersInsertions]);
     })
     .then((data) => {
-      // console.log("TOPICS :", data[0]);
-      // console.log("USERS :", data[1]);
-      // console.log("ARTICLES :", articleData);
       console.log("Successfully populated table 'articles'.");
       return knex("articles").insert(formatDates(articleData)).returning("*");
 
@@ -34,22 +31,17 @@ exports.seed = function (knex) {
       */
     })
     .then((articleRows) => {
-      // console.log(articleRows);
       /*
 
-  Your comment data is currently in the incorrect format and will violate your SQL schema.
+      Your comment data is currently in the incorrect format and will violate your SQL schema.
 
-  Keys need renaming, values need changing, and most annoyingly, your comments currently only refer to the title of the article they belong to, not the id.
+      Keys need renaming, values need changing, and most annoyingly, your comments currently only refer to the title of the article they belong to, not the id.
 
-  You will need to write and test the provided makeRefObj and formatComments utility functions to be able insert your comment data.
-  */
+      You will need to write and test the provided makeRefObj and formatComments utility functions to be able insert your comment data.
+      */
       console.log("Successfully populated table 'comments'.");
       const articleRef = makeRefObj(articleRows);
       const formattedComments = formatComments(commentData, articleRef);
       return knex("comments").insert(formattedComments).returning("*");
-    })
-    .then((data) => {
-      console.log(data);
-      console.log("FINISHED DATA ------------->>> :", data);
     });
 };
