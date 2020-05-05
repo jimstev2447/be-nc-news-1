@@ -1,7 +1,6 @@
 const modUserById = require("../models/modUserById.js");
 
-const getUser = (req, res) => {
-  const { username } = req.params;
+const getUser = ({ params: { username } }, res) => {
   modUserById(username).then((user) => {
     res.status(200).send({ user });
   });
