@@ -26,7 +26,7 @@ describe.only("Testing GET methods", () => {
     });
   });
   describe.only("Testing GET methods for 'users'", () => {
-    test.only("Sends a response containing information about the user which the client requested using the username.", () => {
+    test.only("Sends a response containing information about the user, which the client requested using the username.", () => {
       return request(app)
         .get("/api/users/rogersop")
         .then(({ body: { user } }) => {
@@ -36,8 +36,10 @@ describe.only("Testing GET methods", () => {
               "https://avatars2.githubusercontent.com/u/24394918?s=400&v=4",
             name: "paul",
           });
-          // expect(typeof topics).toBe("object");
-          // expect(Array.isArray(topics)).toBe(true);
+          expect(typeof user).toBe("object");
+          expect(user).toHaveProperty("username");
+          expect(user).toHaveProperty("avatar_url");
+          expect(user).toHaveProperty("name");
         });
     });
   });
