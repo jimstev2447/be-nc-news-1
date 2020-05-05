@@ -26,8 +26,8 @@ describe.only("Testing GET methods", () => {
     });
   });
   describe.only("Testing GET methods for 'users'", () => {
-    test.only("Sends a response containing information about the user, which the client requested using the username.", () => {
-      return request(app)
+    test("Sends a response containing information about the user, which the client requested using the username.", () => {
+      const firstRequest = request(app)
         .get("/api/users/rogersop")
         .then(({ body: { user } }) => {
           expect(user).toEqual({
@@ -41,6 +41,35 @@ describe.only("Testing GET methods", () => {
           expect(user).toHaveProperty("avatar_url");
           expect(user).toHaveProperty("name");
         });
+      const secondRequest = request(app)
+        .get("/api/users/lurker")
+        .then(({ body: { user } }) => {
+          expect(user).toEqual({
+            username: "lurker",
+            name: "do_nothing",
+            avatar_url:
+              "https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png",
+          });
+          expect(typeof user).toBe("object");
+          expect(user).toHaveProperty("username");
+          expect(user).toHaveProperty("avatar_url");
+          expect(user).toHaveProperty("name");
+        });
+      const thirdRequest = request(app)
+        .get("/api/users/butter_bridge")
+        .then(({ body: { user } }) => {
+          expect(user).toEqual({
+            username: "butter_bridge",
+            name: "jonny",
+            avatar_url:
+              "https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg",
+          });
+          expect(typeof user).toBe("object");
+          expect(user).toHaveProperty("username");
+          expect(user).toHaveProperty("avatar_url");
+          expect(user).toHaveProperty("name");
+        });
+      return Promise.all([firstRequest, secondRequest, thirdRequest]);
     });
   });
 });
