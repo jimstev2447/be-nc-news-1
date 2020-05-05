@@ -76,19 +76,74 @@ describe.only("Testing GET methods", () => {
     test("Sends the article containing the required information, which the client searched for using the ID.", () => {
       const firstRequest = request(app)
         .get("/api/articles/1")
-        .then(({ body: { user } }) => {
-          expect(user).toEqual({
-            username: "rogersop",
-            avatar_url:
-              "https://avatars2.githubusercontent.com/u/24394918?s=400&v=4",
-            name: "paul",
+        .then(({ body: { article } }) => {
+          expect(article).toEqual({
+            article_id: 1,
+            title: "Living in the shadow of a great man",
+            body: "I find this existence challenging",
+            votes: 100,
+            topic: "mitch",
+            author: "butter_bridge",
+            created_at: "2018-11-15T12:21:54.171Z",
+            comment_count: "0",
           });
-          expect(typeof user).toBe("object");
-          expect(user).toHaveProperty("username");
-          expect(user).toHaveProperty("avatar_url");
-          expect(user).toHaveProperty("name");
+          expect(typeof article).toBe("object");
+          expect(article).toHaveProperty("article_id");
+          expect(article).toHaveProperty("title");
+          expect(article).toHaveProperty("body");
+          expect(article).toHaveProperty("votes");
+          expect(article).toHaveProperty("topic");
+          expect(article).toHaveProperty("author");
+          expect(article).toHaveProperty("created_at");
+          expect(article).toHaveProperty("comment_count");
         });
-      return Promise.all([firstRequest]);
+      const secondRequest = request(app)
+        .get("/api/articles/3")
+        .then(({ body: { article } }) => {
+          expect(article).toEqual({
+            article_id: 3,
+            title: "Eight pug gifs that remind me of mitch",
+            body: "some gifs",
+            votes: 0,
+            topic: "mitch",
+            author: "icellusedkars",
+            created_at: "2010-11-17T12:21:54.171Z",
+            comment_count: "0",
+          });
+          expect(typeof article).toBe("object");
+          expect(article).toHaveProperty("article_id");
+          expect(article).toHaveProperty("title");
+          expect(article).toHaveProperty("body");
+          expect(article).toHaveProperty("votes");
+          expect(article).toHaveProperty("topic");
+          expect(article).toHaveProperty("author");
+          expect(article).toHaveProperty("created_at");
+          expect(article).toHaveProperty("comment_count");
+        });
+      const thirdRequest = request(app)
+        .get("/api/articles/7")
+        .then(({ body: { article } }) => {
+          expect(article).toEqual({
+            article_id: 7,
+            title: "Z",
+            body: "I was hungry.",
+            votes: 0,
+            topic: "mitch",
+            author: "icellusedkars",
+            created_at: "1994-11-21T12:21:54.171Z",
+            comment_count: "0",
+          });
+          expect(typeof article).toBe("object");
+          expect(article).toHaveProperty("article_id");
+          expect(article).toHaveProperty("title");
+          expect(article).toHaveProperty("body");
+          expect(article).toHaveProperty("votes");
+          expect(article).toHaveProperty("topic");
+          expect(article).toHaveProperty("author");
+          expect(article).toHaveProperty("created_at");
+          expect(article).toHaveProperty("comment_count");
+        });
+      return Promise.all([firstRequest, secondRequest, thirdRequest]);
     });
   });
 });
