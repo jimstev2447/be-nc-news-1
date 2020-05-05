@@ -73,9 +73,9 @@ describe.only("Testing GET methods", () => {
     });
   });
   describe("Testing GET methods for 'articles'", () => {
-    test("Sends a response containing information about the user, which the client requested using the username.", () => {
+    test("Sends the article containing the required information, which the client searched for using the ID.", () => {
       const firstRequest = request(app)
-        .get("/api/articles/rogersop")
+        .get("/api/articles/1")
         .then(({ body: { user } }) => {
           expect(user).toEqual({
             username: "rogersop",
