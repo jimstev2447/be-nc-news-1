@@ -6,7 +6,7 @@ const knex = require("../db/data/connection.js");
 
 describe.only("Testing GET methods", () => {
   afterAll(() => knex.destroy());
-  xdescribe("Testing GET methods for 'topics'", () => {
+  describe("Testing GET methods for 'topics'", () => {
     test("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
       return request(app)
         .get("/api/topics/")
@@ -25,7 +25,7 @@ describe.only("Testing GET methods", () => {
         });
     });
   });
-  describe.only("Testing GET methods for 'users'", () => {
+  describe("Testing GET methods for 'users'", () => {
     test("Sends a response containing information about the user, which the client requested using the username.", () => {
       const firstRequest = request(app)
         .get("/api/users/rogersop")
@@ -70,6 +70,25 @@ describe.only("Testing GET methods", () => {
           expect(user).toHaveProperty("name");
         });
       return Promise.all([firstRequest, secondRequest, thirdRequest]);
+    });
+  });
+  describe("Testing GET methods for 'articles'", () => {
+    test("Sends a response containing information about the user, which the client requested using the username.", () => {
+      const firstRequest = request(app)
+        .get("/api/articles/rogersop")
+        .then(({ body: { user } }) => {
+          expect(user).toEqual({
+            username: "rogersop",
+            avatar_url:
+              "https://avatars2.githubusercontent.com/u/24394918?s=400&v=4",
+            name: "paul",
+          });
+          expect(typeof user).toBe("object");
+          expect(user).toHaveProperty("username");
+          expect(user).toHaveProperty("avatar_url");
+          expect(user).toHaveProperty("name");
+        });
+      return Promise.all([firstRequest]);
     });
   });
 });

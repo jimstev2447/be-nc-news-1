@@ -18,9 +18,10 @@ exports.seed = function (knex) {
       console.log("Successfully populated table 'users'.");
       return Promise.all([topicsInsertions, usersInsertions]);
     })
-    .then((data) => {
+    .then(() => {
       console.log("Successfully populated table 'articles'.");
-      return knex("articles").insert(formatDates(articleData)).returning("*");
+      const updatedArticles = formatDates(articleData);
+      return knex.insert(updatedArticles).into("articles").returning("*");
     })
     .then((articleRows) => {
       console.log("Successfully populated table 'comments'.");
