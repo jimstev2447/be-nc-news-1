@@ -1,15 +1,7 @@
-const knex = require("../db/data/connection.js");
+// const knex = require("../db/data/connection.js");
 
-const modVoteArticleById = () => {
-  return knex("articles")
-    .select("articles.*")
-    .count({ comment_count: "comment_id" })
-    .leftJoin("comments", "comments.article_id", "articles.article_id")
-    .groupBy("articles.article_id")
-    .where("articles.article_id", "=", `${article_id}`)
-    .then(([article]) => {
-      return article;
-    });
-};
+// const modVoteArticleById = (article_id, incVotes) => {
+//   console.log("hello");
+// };
 
-module.exports = modVoteArticleById;
+// module.exports = modVoteArticleById;
