@@ -21,6 +21,7 @@ describe.only("Testing GET methods", () => {
             { slug: "paper", description: "what books are made of" },
           ]);
           expect(typeof topics).toBe("object");
+          expect(Array.isArray(topics)).toBe(true);
         });
     });
   });
