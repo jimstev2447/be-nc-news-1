@@ -43,14 +43,13 @@ exports.seed = function (knex) {
 
   You will need to write and test the provided makeRefObj and formatComments utility functions to be able insert your comment data.
   */
-
+      console.log("Successfully populated table 'comments'.");
       const articleRef = makeRefObj(articleRows);
-      return articleRef;
-      // const formattedComments = formatComments(commentData, articleRef);
-      // return knex("comments").insert(formattedComments);
+      const formattedComments = formatComments(commentData, articleRef);
+      return knex("comments").insert(formattedComments).returning("*");
     })
     .then((data) => {
       console.log(data);
-      console.log("COMMENTS :", commentData);
+      console.log("FINISHED DATA ------------->>> :", data);
     });
 };
