@@ -1,5 +1,3 @@
-const modAllTopics = () => {
-  console.log("Its alive!");
-};
+const modAllTopics = () => {};
 
 module.exports = modAllTopics;
