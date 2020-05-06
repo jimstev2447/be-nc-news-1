@@ -350,4 +350,24 @@ xdescribe("Testing PATCH methods", () => {
   });
 });
 
-// xdescribe("Testing POST methods", () => {});
+describe("Testing POST methods", () => {
+  describe("Testing POST methods for comments by article ID", () => {
+    test("Posts a new comment to an article which was selected by article ID.", () => {
+      return request(app)
+        .post("/api/articles/:article_id/comments")
+        .send({ inc_votes: 10 })
+        .expect(200)
+        .then(({ body: { comment } }) => {
+          expect(comment).toEqual({
+            comment_id: 1,
+            author: "butter_bridge",
+            article_id: 9,
+            votes: 26,
+            created_at: "2017-11-22T12:36:03.389Z",
+            body:
+              "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+          });
+        });
+    });
+  });
+});
