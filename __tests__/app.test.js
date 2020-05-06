@@ -346,9 +346,16 @@ xdescribe("Testing GET methods", () => {
   });
 });
 
-describe("Testing DELETE methods", () => {
+describe.only("Testing DELETE methods", () => {
   describe("Testing DELETE methods for 'comments'", () => {
-    test("should ", () => {});
+    test("it deletes a comment according to ID ", () => {
+      return request(app)
+        .del("/api/comments/1")
+        .then(() => {
+          console.log("Test works");
+          expect().toBe();
+        });
+    });
   });
 });
 
