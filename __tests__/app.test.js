@@ -298,14 +298,14 @@ describe("Testing GET methods", () => {
   });
 });
 
-xdescribe("Testing DELETE methods", () => {
+describe("Testing DELETE methods", () => {
   describe("Testing DELETE methods for 'comments'", () => {
     test("it deletes a comment according to ID", () => {
       return request(app).del("/api/comments/1").expect(204);
     });
-    test("Sends a 404 error when given the wrong comment ID", () => {
+    xtest("Sends a 404 error when given the wrong comment ID", () => {
       return request(app)
-        .del("/api/comments/90")
+        .del("/api/comments/!0")
         .expect(404)
         .then(({ body: { message } }) => {
           expect(message).toBe("Comment not found.");
@@ -314,7 +314,7 @@ xdescribe("Testing DELETE methods", () => {
   });
 });
 
-xdescribe("Testing PATCH methods", () => {
+describe("Testing PATCH methods", () => {
   describe("Testing PATCH methods for 'articles'", () => {
     test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
       return request(app)
@@ -355,7 +355,7 @@ xdescribe("Testing PATCH methods", () => {
   });
 });
 
-xdescribe("Testing POST methods", () => {
+describe("Testing POST methods", () => {
   describe("Testing POST methods for comments by article ID", () => {
     test("Posts a new comment to an article which was selected by article ID.", () => {
       return request(app)
