@@ -337,13 +337,13 @@ describe.only("Testing PATCH methods", () => {
         .expect(200)
         .then(({ body: { comment } }) => {
           expect(comment).toEqual({
-            comment_id: 2,
+            comment_id: 1,
             author: "butter_bridge",
-            article_id: 1,
-            votes: 14,
-            created_at: "2016-11-22T12:36:03.389Z",
+            article_id: 9,
+            votes: 26,
+            created_at: "2017-11-22T12:36:03.389Z",
             body:
-              "The beautiful thing about treasure is that it exists. Got to find out what kind of sheets these are; not cotton, not rayon, silky.",
+              "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
           });
         });
     });
