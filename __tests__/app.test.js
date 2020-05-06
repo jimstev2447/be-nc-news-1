@@ -305,7 +305,7 @@ describe("Testing DELETE methods", () => {
     });
     xtest("Sends a 404 error when given the wrong comment ID", () => {
       return request(app)
-        .del("/api/comments/!0")
+        .del("/api/comments/99/")
         .expect(404)
         .then(({ body: { message } }) => {
           expect(message).toBe("Comment not found.");
@@ -355,7 +355,7 @@ describe("Testing PATCH methods", () => {
   });
 });
 
-describe("Testing POST methods", () => {
+describe.only("Testing POST methods", () => {
   describe("Testing POST methods for comments by article ID", () => {
     test("Posts a new comment to an article which was selected by article ID.", () => {
       return request(app)
@@ -368,6 +368,18 @@ describe("Testing POST methods", () => {
         .then(({ body: { comment } }) => {
           expect(comment[0]["author"]).toEqual("butter_bridge");
           expect(comment[0]["body"]).toEqual("This works!");
+        });
+    });
+    test.only("Sends a 404 error when given the wrong information to post", () => {
+      return request(app)
+        .post("/api/articleZ/U9/coms")
+        .send({
+          body: "This works!",
+          username: "butter_bridge",
+        })
+        .expect(404)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("The request resource or route was not found.");
         });
     });
   });
