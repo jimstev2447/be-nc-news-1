@@ -310,8 +310,8 @@ xdescribe("Testing DELETE methods", () => {
 });
 
 describe.only("Testing PATCH methods", () => {
-  describe.only("Testing PATCH methods for 'articles'", () => {
-    test.only("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
+  describe("Testing PATCH methods for 'articles'", () => {
+    test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
       return request(app)
         .patch("/api/articles/1")
         .send({ inc_votes: 10 })
@@ -326,6 +326,17 @@ describe.only("Testing PATCH methods", () => {
             author: "butter_bridge",
             created_at: "2018-11-15T12:21:54.171Z",
           });
+        });
+    });
+  });
+  describe.only("Testing PATCH methods for 'comments'", () => {
+    test.only("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
+      return request(app)
+        .patch("/api/comments/1")
+        .send({ inc_votes: 10 })
+        .expect(200)
+        .then(({ body: { comment } }) => {
+          expect(comment).toEqual({});
         });
     });
   });
