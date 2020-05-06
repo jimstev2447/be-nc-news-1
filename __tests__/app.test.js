@@ -147,8 +147,9 @@ describe.only("Testing GET methods", () => {
     });
     test.only("Sends the comments of the article, which the client searched for using the ID.", () => {
       return request(app)
-        .get("/api/articles/1/comments")
-        .then(({ body: { article } }) => {
+        .get("/api/articles/1/comments?sort_by=created_at&&order=desc")
+        .then((res) => {
+          console.log(res);
           expect(article).toEqual({
             article_id: 1,
             title: "Living in the shadow of a great man",
