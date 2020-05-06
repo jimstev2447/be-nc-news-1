@@ -298,7 +298,7 @@ describe("Testing GET methods", () => {
   });
 });
 
-describe.only("Testing DELETE methods", () => {
+describe("Testing DELETE methods", () => {
   describe("Testing DELETE methods for 'comments'", () => {
     test("it deletes a comment according to ID", () => {
       return request(app).del("/api/comments/1").expect(204);
@@ -311,7 +311,7 @@ describe.only("Testing DELETE methods", () => {
           expect(message).toBe("Invalid method");
         });
     });
-    test.only("Sends a 404 error when given the wrong comment ID", () => {
+    test("Sends a 404 error when given the wrong comment ID", () => {
       return request(app)
         .del("/api/commT&ts/9Ty9")
         .expect(404)
