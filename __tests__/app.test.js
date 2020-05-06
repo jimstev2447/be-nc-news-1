@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 afterAll(() => knex.destroy());
 
-describe.only("Testing GET methods", () => {
+describe("Testing GET methods", () => {
   describe("Testing GET methods for 'topics'", () => {
     test("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
       return request(app)
@@ -64,7 +64,7 @@ describe.only("Testing GET methods", () => {
         });
       return Promise.all([firstRequest, secondRequest]);
     });
-    test.only("Sends a 404 error when given the wrong input", () => {
+    test("Sends a 404 error when given the wrong input", () => {
       return request(app)
         .get("/api/user/")
         .expect(404)

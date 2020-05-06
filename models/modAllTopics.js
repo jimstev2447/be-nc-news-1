@@ -5,8 +5,10 @@ const modAllTopics = () => {
     .select("*")
     .from("topics")
     .then((allTopics) => {
-      if (err) {
+      if (!allTopics) {
         return Promise.reject({ status: 404, message: "Topics not found." });
+      } else {
+        return allTopics;
       }
     });
 };
