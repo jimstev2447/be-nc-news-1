@@ -149,21 +149,20 @@ describe("Testing GET methods", () => {
         });
       return Promise.all([firstRequest, secondRequest, thirdRequest]);
     });
-    xtest("Sends the comments of the article, which the client searched for using the ID.", () => {
+    test("Sends the comments of the article, which the client searched for using the ID.", () => {
       return request(app)
         .get("/api/articles/1/comments?sort_by=created_at&&order=desc")
-        .then((res) => {
-          expect(article).toEqual({
-            article_id: 1,
-            title: "Living in the shadow of a great man",
-            body: "I find this existence challenging",
-            votes: 100,
-            topic: "mitch",
+        .then(({ body: { comments } }) => {
+          expect(comments[0]).toEqual({
+            comment_id: 2,
             author: "butter_bridge",
-            created_at: "2018-11-15T12:21:54.171Z",
-            comment_count: "0",
+            article_id: 1,
+            votes: 14,
+            created_at: "2016-11-22T12:36:03.389Z",
+            body:
+              "The beautiful thing about treasure is that it exists. Got to find out what kind of sheets these are; not cotton, not rayon, silky.",
           });
-          expect(typeof article).toBe("object");
+          expect(typeof comments[0]).toBe("object");
         });
     });
     xtest("Sends all the articles.", () => {

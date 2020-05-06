@@ -5,7 +5,7 @@ const getCommentsByArticleId = (req, res) => {
   const sort_by = req.query["sort_by"];
   const order = req.query.order;
   modCommentsByArticleId(article_id, sort_by, order).then((comments) => {
-    res.status(200).send(comments);
+    res.status(200).send({ comments });
   });
 };
 
