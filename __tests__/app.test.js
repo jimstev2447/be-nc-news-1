@@ -298,23 +298,31 @@ describe("Testing GET methods", () => {
   });
 });
 
-describe("Testing DELETE methods", () => {
+describe.only("Testing DELETE methods", () => {
   describe("Testing DELETE methods for 'comments'", () => {
     test("it deletes a comment according to ID", () => {
       return request(app).del("/api/comments/1").expect(204);
     });
-    xtest("Sends a 404 error when given the wrong comment ID", () => {
+    test("Sends a 405 error when using the wrong method", () => {
       return request(app)
-        .del("/api/comments/99/")
+        .del("/api/comments/9Ty9")
+        .expect(405)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Invalid method");
+        });
+    });
+    test.only("Sends a 404 error when given the wrong comment ID", () => {
+      return request(app)
+        .del("/api/commT&ts/9Ty9")
         .expect(404)
         .then(({ body: { message } }) => {
-          expect(message).toBe("Comment not found.");
+          expect(message).toBe("The request resource or route was not found.");
         });
     });
   });
 });
 
-describe.only("Testing PATCH methods", () => {
+describe("Testing PATCH methods", () => {
   describe("Testing PATCH methods for 'articles'", () => {
     test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
       return request(app)
@@ -334,7 +342,7 @@ describe.only("Testing PATCH methods", () => {
         });
     });
   });
-  describe.only("Testing PATCH methods for 'comments'", () => {
+  describe("Testing PATCH methods for 'comments'", () => {
     test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
       return request(app)
         .patch("/api/comments/1")
@@ -352,7 +360,7 @@ describe.only("Testing PATCH methods", () => {
           });
         });
     });
-    test.only("Sends a 404 error when given the wrong information to post", () => {
+    test("Sends a 404 error when given the wrong information to patch", () => {
       return request(app)
         .patch("/api/comment£ER/1")
         .send({ inc_votes: 10 })
