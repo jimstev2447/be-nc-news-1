@@ -5,7 +5,7 @@ const modVoteArticleById = (article_id, incVotes) => {
     .where("articles.article_id", "=", article_id)
     .increment("votes", incVotes)
     .returning("*")
-    .then((article) => {
+    .then(([article]) => {
       console.log(article);
       return article;
     });
