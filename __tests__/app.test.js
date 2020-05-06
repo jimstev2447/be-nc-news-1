@@ -4,8 +4,12 @@ const request = require("supertest");
 const app = require("../app.js");
 const knex = require("../db/data/connection.js");
 
+beforeEach(() => {
+  return knex.seed.run();
+});
+afterAll(() => knex.destroy());
+
 xdescribe("Testing GET methods", () => {
-  afterAll(() => knex.destroy());
   xdescribe("Testing GET methods for 'topics'", () => {
     test("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
       return request(app)
@@ -348,7 +352,7 @@ xdescribe("Testing GET methods", () => {
 
 describe.only("Testing DELETE methods", () => {
   describe("Testing DELETE methods for 'comments'", () => {
-    test("it deletes a comment according to ID ", () => {
+    test("it deletes a comment according to ID  ", () => {
       return request(app).del("/api/comments/1").expect(204);
     });
   });
