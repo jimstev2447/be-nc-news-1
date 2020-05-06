@@ -12,9 +12,15 @@ exports.up = function (knex) {
     articlesTable.text("body");
     articlesTable.integer("votes").defaultTo(0);
     articlesTable.text("topic");
-    articlesTable.foreign("topic").references("topics.slug");
+    articlesTable
+      .foreign("topic")
+      .references("topics.slug")
+      .onDelete("CASCADE");
     articlesTable.text("author");
-    articlesTable.foreign("author").references("users.username");
+    articlesTable
+      .foreign("author")
+      .references("users.username")
+      .onDelete("CASCADE");
     articlesTable
       .timestamp("created_at", { precision: 6 })
       .defaultTo(knex.fn.now(6));
