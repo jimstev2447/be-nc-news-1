@@ -5,7 +5,7 @@ const modDeleteCommentsById = (comment_id) => {
     .where({ comment_id })
     .del()
     .then((delCount) => {
-      if (delCount === 1) {
+      if (delCount === 0) {
         return Promise.reject({ status: 404, message: "Comment not found." });
       }
     });
