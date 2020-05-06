@@ -9,8 +9,8 @@ beforeEach(() => {
 });
 afterAll(() => knex.destroy());
 
-xdescribe("Testing GET methods", () => {
-  xdescribe("Testing GET methods for 'topics'", () => {
+describe("Testing GET methods", () => {
+  describe("Testing GET methods for 'topics'", () => {
     test("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
       return request(app)
         .get("/api/topics/")
@@ -29,7 +29,7 @@ xdescribe("Testing GET methods", () => {
         });
     });
   });
-  xdescribe("Testing GET methods for 'users'", () => {
+  describe("Testing GET methods for 'users'", () => {
     test("Sends a response containing information about the user, which the client requested using the username.", () => {
       const firstRequest = request(app)
         .get("/api/users/rogersop")
@@ -76,8 +76,8 @@ xdescribe("Testing GET methods", () => {
       return Promise.all([firstRequest, secondRequest, thirdRequest]);
     });
   });
-  xdescribe("Testing GET methods for 'articles'", () => {
-    xtest("Sends the article containing the required information, which the client searched for using the ID.", () => {
+  describe("Testing GET methods for 'articles'", () => {
+    test("Sends the article containing the required information, which the client searched for using the ID.", () => {
       const firstRequest = request(app)
         .get("/api/articles/1")
         .then(({ body: { article } }) => {
@@ -149,7 +149,7 @@ xdescribe("Testing GET methods", () => {
         });
       return Promise.all([firstRequest, secondRequest, thirdRequest]);
     });
-    xtest("Sends the comments of the article, which the client searched for using the ID.", () => {
+    test("Sends the comments of the article, which the client searched for using the ID.", () => {
       return request(app)
         .get("/api/articles/1/comments?sort_by=created_at&&order=desc")
         .then(({ body: { comments } }) => {
@@ -165,7 +165,7 @@ xdescribe("Testing GET methods", () => {
           expect(typeof comments[0]).toBe("object");
         });
     });
-    xtest("Sends all the articles.", () => {
+    test("Sends all the articles.", () => {
       return request(app)
         .get("/api/articles/")
         .then(({ body: { articles } }) => {
@@ -301,15 +301,15 @@ xdescribe("Testing GET methods", () => {
   });
 });
 
-xdescribe("Testing DELETE methods", () => {
-  xdescribe("Testing DELETE methods for 'comments'", () => {
+describe("Testing DELETE methods", () => {
+  describe("Testing DELETE methods for 'comments'", () => {
     test("it deletes a comment according to ID  ", () => {
       return request(app).del("/api/comments/1").expect(204);
     });
   });
 });
 
-xdescribe("Testing PATCH methods", () => {
+describe("Testing PATCH methods", () => {
   describe("Testing PATCH methods for 'articles'", () => {
     test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
       return request(app)

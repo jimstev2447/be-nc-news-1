@@ -2,9 +2,6 @@ exports.up = function (knex) {
   /*
   This function will create the 'articles' table. It has the columns 'article_id' as a primary numerical key, 'title', 'body', 'votes', 'topic', 'author' and 'created_at'. 
   */
-  console.log(
-    "Created the 'articles' table with the columns 'article_id', 'title', 'body', 'votes', 'topic', 'author' and 'created_at'."
-  );
 
   return knex.schema.createTable("articles", (articlesTable) => {
     articlesTable.increments("article_id").primary();
@@ -28,6 +25,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  console.log("Deleted the 'articles' table.");
   return knex.schema.dropTable("articles");
 };

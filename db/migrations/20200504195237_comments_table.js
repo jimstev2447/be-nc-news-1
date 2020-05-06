@@ -2,9 +2,6 @@ exports.up = function (knex) {
   /*
   This function will create the 'comments' table. It has the columns 'comment_id' as a primary numerical key, 'author', 'article_id', 'votes', 'created_at', and 'body'.
   */
-  console.log(
-    "Created the 'comments' table with the columns 'comment_id', 'author', 'article_id', 'votes', 'created_at', and 'body'."
-  );
 
   return knex.schema.createTable("comments", (commentsTable) => {
     commentsTable.increments("comment_id").primary();
@@ -27,6 +24,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  console.log("Deleted the 'comments' table.");
   return knex.schema.dropTable("comments");
 };

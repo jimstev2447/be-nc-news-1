@@ -6,7 +6,6 @@ const modPatchCommentVoteById = (comment_id, incVotes) => {
     .increment("votes", incVotes)
     .returning("*")
     .then(([comment]) => {
-      console.log(comment);
       return comment;
     });
 };

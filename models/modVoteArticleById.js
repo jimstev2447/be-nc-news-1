@@ -6,7 +6,6 @@ const modVoteArticleById = (article_id, incVotes) => {
     .increment("votes", incVotes)
     .returning("*")
     .then(([article]) => {
-      console.log(article);
       return article;
     });
 };
