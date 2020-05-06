@@ -1,8 +1,16 @@
 const modPatchCommentVoteById = require("../models/modPatchCommentVoteById");
 
 const patchCommentVoteById = (req, res) => {
-  modPatchCommentVoteById().then(() => {
-    res.send();
+  const comment_id = req.params.article_id;
+  const incVotes = req.body.inc_votes;
+  console.log(comment_id);
+
+  console.log(incVotes);
+
+  console.log("hello controller");
+  modPatchCommentVoteById(comment_id, incVotes).then((updatedComment) => {
+    console.log(updatedComment);
+    res.status(200).send({ comment: updatedComment });
   });
 };
 

@@ -336,7 +336,15 @@ describe.only("Testing PATCH methods", () => {
         .send({ inc_votes: 10 })
         .expect(200)
         .then(({ body: { comment } }) => {
-          expect(comment).toEqual({});
+          expect(comment).toEqual({
+            comment_id: 2,
+            author: "butter_bridge",
+            article_id: 1,
+            votes: 14,
+            created_at: "2016-11-22T12:36:03.389Z",
+            body:
+              "The beautiful thing about treasure is that it exists. Got to find out what kind of sheets these are; not cotton, not rayon, silky.",
+          });
         });
     });
   });
