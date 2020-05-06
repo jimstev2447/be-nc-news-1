@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const apiRouter = require("./routes/apiRouter.js");
-const error404Handler = require("./errorHandlers/error404.js");
+const error404Handler = require("./errorHandlers/error404Handler.js");
+const error505Handler = require("./errorHandlers/error505Handler");
 
 app.use(express.json());
 
@@ -14,8 +15,6 @@ app.use((err, req, res, next) => {
   else next(err);
 });
 
-app.use((err, req, res, next) => {
-  res.status(500).send({ message: "Server error" });
-});
+app.use(error505Handler);
 
 module.exports = app;
