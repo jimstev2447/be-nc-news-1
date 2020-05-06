@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 afterAll(() => knex.destroy());
 
-describe("Testing GET methods", () => {
+xdescribe("Testing GET methods", () => {
   describe("Testing GET methods for 'topics'", () => {
     test("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
       return request(app)
@@ -301,15 +301,23 @@ describe("Testing GET methods", () => {
   });
 });
 
-describe("Testing DELETE methods", () => {
+describe.only("Testing DELETE methods", () => {
   describe("Testing DELETE methods for 'comments'", () => {
-    test("it deletes a comment according to ID  ", () => {
+    test("it deletes a comment according to ID", () => {
       return request(app).del("/api/comments/1").expect(204);
+    });
+    test.only("Sends a 404 error when given the wrong comment ID", () => {
+      return request(app)
+        .del("/api/comments/90")
+        .expect(404)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Comment not found.");
+        });
     });
   });
 });
 
-describe("Testing PATCH methods", () => {
+xdescribe("Testing PATCH methods", () => {
   describe("Testing PATCH methods for 'articles'", () => {
     test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
       return request(app)
@@ -350,7 +358,7 @@ describe("Testing PATCH methods", () => {
   });
 });
 
-describe("Testing POST methods", () => {
+xdescribe("Testing POST methods", () => {
   describe("Testing POST methods for comments by article ID", () => {
     test("Posts a new comment to an article which was selected by article ID.", () => {
       return request(app)
