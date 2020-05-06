@@ -314,7 +314,7 @@ describe("Testing DELETE methods", () => {
   });
 });
 
-describe("Testing PATCH methods", () => {
+describe.only("Testing PATCH methods", () => {
   describe("Testing PATCH methods for 'articles'", () => {
     test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
       return request(app)
@@ -334,7 +334,7 @@ describe("Testing PATCH methods", () => {
         });
     });
   });
-  describe("Testing PATCH methods for 'comments'", () => {
+  describe.only("Testing PATCH methods for 'comments'", () => {
     test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
       return request(app)
         .patch("/api/comments/1")
@@ -352,10 +352,19 @@ describe("Testing PATCH methods", () => {
           });
         });
     });
+    test.only("Sends a 404 error when given the wrong information to post", () => {
+      return request(app)
+        .patch("/api/comment£ER/1")
+        .send({ inc_votes: 10 })
+        .expect(404)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("The request resource or route was not found.");
+        });
+    });
   });
 });
 
-describe.only("Testing POST methods", () => {
+describe("Testing POST methods", () => {
   describe("Testing POST methods for comments by article ID", () => {
     test("Posts a new comment to an article which was selected by article ID.", () => {
       return request(app)
@@ -370,7 +379,7 @@ describe.only("Testing POST methods", () => {
           expect(comment[0]["body"]).toEqual("This works!");
         });
     });
-    test.only("Sends a 404 error when given the wrong information to post", () => {
+    test("Sends a 404 error when given the wrong information to post", () => {
       return request(app)
         .post("/api/articleZ/U9/coms")
         .send({
