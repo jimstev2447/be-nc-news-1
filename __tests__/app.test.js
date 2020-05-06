@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 afterAll(() => knex.destroy());
 
-xdescribe("Testing GET methods", () => {
+describe.only("Testing GET methods", () => {
   describe("Testing GET methods for 'topics'", () => {
     test("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
       return request(app)
@@ -27,6 +27,9 @@ xdescribe("Testing GET methods", () => {
           expect(typeof topics).toBe("object");
           expect(Array.isArray(topics)).toBe(true);
         });
+    });
+    test.only("Sends a 404 error when given the wrong input", () => {
+      return request(app).get("/nothing").expect(404);
     });
   });
   describe("Testing GET methods for 'users'", () => {
@@ -59,21 +62,7 @@ xdescribe("Testing GET methods", () => {
           expect(user).toHaveProperty("avatar_url");
           expect(user).toHaveProperty("name");
         });
-      const thirdRequest = request(app)
-        .get("/api/users/butter_bridge")
-        .then(({ body: { user } }) => {
-          expect(user).toEqual({
-            username: "butter_bridge",
-            name: "jonny",
-            avatar_url:
-              "https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg",
-          });
-          expect(typeof user).toBe("object");
-          expect(user).toHaveProperty("username");
-          expect(user).toHaveProperty("avatar_url");
-          expect(user).toHaveProperty("name");
-        });
-      return Promise.all([firstRequest, secondRequest, thirdRequest]);
+      return Promise.all([firstRequest, secondRequest]);
     });
   });
   describe("Testing GET methods for 'articles'", () => {
@@ -301,12 +290,12 @@ xdescribe("Testing GET methods", () => {
   });
 });
 
-describe.only("Testing DELETE methods", () => {
+xdescribe("Testing DELETE methods", () => {
   describe("Testing DELETE methods for 'comments'", () => {
     test("it deletes a comment according to ID", () => {
       return request(app).del("/api/comments/1").expect(204);
     });
-    test.only("Sends a 404 error when given the wrong comment ID", () => {
+    test("Sends a 404 error when given the wrong comment ID", () => {
       return request(app)
         .del("/api/comments/90")
         .expect(404)
