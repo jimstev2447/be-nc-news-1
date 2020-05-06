@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 afterAll(() => knex.destroy());
 
-describe("Testing GET methods", () => {
+xdescribe("Testing GET methods", () => {
   xdescribe("Testing GET methods for 'topics'", () => {
     test("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
       return request(app)
@@ -76,7 +76,7 @@ describe("Testing GET methods", () => {
       return Promise.all([firstRequest, secondRequest, thirdRequest]);
     });
   });
-  describe("Testing GET methods for 'articles'", () => {
+  xdescribe("Testing GET methods for 'articles'", () => {
     xtest("Sends the article containing the required information, which the client searched for using the ID.", () => {
       const firstRequest = request(app)
         .get("/api/articles/1")
@@ -149,7 +149,7 @@ describe("Testing GET methods", () => {
         });
       return Promise.all([firstRequest, secondRequest, thirdRequest]);
     });
-    test("Sends the comments of the article, which the client searched for using the ID.", () => {
+    xtest("Sends the comments of the article, which the client searched for using the ID.", () => {
       return request(app)
         .get("/api/articles/1/comments?sort_by=created_at&&order=desc")
         .then(({ body: { comments } }) => {
@@ -169,7 +169,6 @@ describe("Testing GET methods", () => {
       return request(app)
         .get("/api/articles/")
         .then(({ body: { articles } }) => {
-          const output = articles;
           expect(articles).toEqual([
             {
               article_id: 4,
@@ -310,25 +309,25 @@ xdescribe("Testing DELETE methods", () => {
   });
 });
 
-// xdescribe("Testing PATCH methods", () => {
-//   describe.only("Testing PATCH methods for 'articles'", () => {
-//     test.only("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
-//       return request(app)
-//         .patch("/api/articles/1")
-//         .then(({ body: { article } }) => {
-//           expect(article).toEqual({
-//             article_id: 1,
-//             title: "Living in the shadow of a great man",
-//             body: "I find this existence challenging",
-//             votes: 100,
-//             topic: "mitch",
-//             author: "butter_bridge",
-//             created_at: "2018-11-15T12:21:54.171Z",
-//             comment_count: "0",
-//           });
-//         });
-//     });
-//   });
-// });
+describe.only("Testing PATCH methods", () => {
+  describe.only("Testing PATCH methods for 'articles'", () => {
+    test.only("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
+      return request(app)
+        .patch("/api/articles/1")
+        .then(({ body: { article } }) => {
+          expect(article).toEqual({
+            article_id: 1,
+            title: "Living in the shadow of a great man",
+            body: "I find this existence challenging",
+            votes: 100,
+            topic: "mitch",
+            author: "butter_bridge",
+            created_at: "2018-11-15T12:21:54.171Z",
+            comment_count: "0",
+          });
+        });
+    });
+  });
+});
 
 // xdescribe("Testing POST methods", () => {});
