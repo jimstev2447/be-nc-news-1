@@ -72,7 +72,7 @@ describe.only("Testing GET methods", () => {
       return Promise.all([firstRequest, secondRequest, thirdRequest]);
     });
   });
-  describe.only("Testing GET methods for 'articles'", () => {
+  xdescribe("Testing GET methods for 'articles'", () => {
     test("Sends the article containing the required information, which the client searched for using the ID.", () => {
       const firstRequest = request(app)
         .get("/api/articles/1")
@@ -145,7 +145,7 @@ describe.only("Testing GET methods", () => {
         });
       return Promise.all([firstRequest, secondRequest, thirdRequest]);
     });
-    test.only("Sends the comments of the article, which the client searched for using the ID.", () => {
+    test("Sends the comments of the article, which the client searched for using the ID.", () => {
       return request(app)
         .get("/api/articles/1/comments?sort_by=created_at&&order=desc")
         .then((res) => {
@@ -161,6 +161,61 @@ describe.only("Testing GET methods", () => {
             comment_count: "0",
           });
           expect(typeof article).toBe("object");
+        });
+    });
+  });
+  describe.only("Testing GET methods for 'articles'", () => {
+    xtest("Sends the article containing the required information, which the client searched for using the ID.", () => {
+      const firstRequest = request(app)
+        .get("/api/articles/1")
+        .then(({ body: { article } }) => {
+          expect(article).toEqual({
+            article_id: 1,
+            title: "Living in the shadow of a great man",
+            body: "I find this existence challenging",
+            votes: 100,
+            topic: "mitch",
+            author: "butter_bridge",
+            created_at: "2018-11-15T12:21:54.171Z",
+            comment_count: "0",
+          });
+          expect(typeof article).toBe("object");
+          expect(article).toHaveProperty("article_id");
+          expect(article).toHaveProperty("title");
+          expect(article).toHaveProperty("body");
+          expect(article).toHaveProperty("votes");
+          expect(article).toHaveProperty("topic");
+          expect(article).toHaveProperty("author");
+          expect(article).toHaveProperty("created_at");
+          expect(article).toHaveProperty("comment_count");
+        });
+      return Promise.all([firstRequest]);
+    });
+    xtest("Sends the comments of the article, which the client searched for using the ID.", () => {
+      return request(app)
+        .get("/api/articles/1/comments?sort_by=created_at&&order=desc")
+        .then((res) => {
+          console.log(res);
+          expect(article).toEqual({
+            article_id: 1,
+            title: "Living in the shadow of a great man",
+            body: "I find this existence challenging",
+            votes: 100,
+            topic: "mitch",
+            author: "butter_bridge",
+            created_at: "2018-11-15T12:21:54.171Z",
+            comment_count: "0",
+          });
+          expect(typeof article).toBe("object");
+        });
+    });
+    test.only("Sends all the articles.", () => {
+      return request(app)
+        .get("/api/articles/")
+        .then((res) => {
+          console.log(res.body.articles);
+          // expect(articles).toEqual({});
+          expect(typeof res.body).toBe("object");
         });
     });
   });
