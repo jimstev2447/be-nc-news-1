@@ -6,7 +6,14 @@ const modUserById = (username) => {
     .from("users")
     .where("users.username", "=", `${username}`)
     .then(([user]) => {
-      return user;
+      if (!user) {
+        return Promise.reject({
+          status: 404,
+          msg: "User not found.",
+        });
+      } else {
+        return user;
+      }
     });
 };
 

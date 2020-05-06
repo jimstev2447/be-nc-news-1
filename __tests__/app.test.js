@@ -28,7 +28,7 @@ describe.only("Testing GET methods", () => {
           expect(Array.isArray(topics)).toBe(true);
         });
     });
-    test.only("Sends a 404 error when given the wrong input", () => {
+    test("Sends a 404 error when given the wrong input", () => {
       return request(app).get("/nothing").expect(404);
     });
   });
@@ -63,6 +63,14 @@ describe.only("Testing GET methods", () => {
           expect(user).toHaveProperty("name");
         });
       return Promise.all([firstRequest, secondRequest]);
+    });
+    test.only("Sends a 404 error when given the wrong input", () => {
+      return request(app)
+        .get("/api/user/")
+        .expect(404)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("The request resource or route was not found.");
+        });
     });
   });
   describe("Testing GET methods for 'articles'", () => {
