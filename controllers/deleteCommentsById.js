@@ -1,4 +1,4 @@
-const modDeleteCommentsById = require("./");
+const modDeleteCommentsById = require("../models/modDeleteCommentsById");
 
 const deleteCommentsById = (req, res) => {
   modDeleteCommentsById().then(() => {

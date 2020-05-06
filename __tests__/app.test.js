@@ -4,9 +4,9 @@ const request = require("supertest");
 const app = require("../app.js");
 const knex = require("../db/data/connection.js");
 
-describe.only("Testing GET methods", () => {
+xdescribe("Testing GET methods", () => {
   afterAll(() => knex.destroy());
-  describe("Testing GET methods for 'topics'", () => {
+  xdescribe("Testing GET methods for 'topics'", () => {
     test("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
       return request(app)
         .get("/api/topics/")
@@ -25,7 +25,7 @@ describe.only("Testing GET methods", () => {
         });
     });
   });
-  describe("Testing GET methods for 'users'", () => {
+  xdescribe("Testing GET methods for 'users'", () => {
     test("Sends a response containing information about the user, which the client requested using the username.", () => {
       const firstRequest = request(app)
         .get("/api/users/rogersop")
@@ -164,8 +164,8 @@ describe.only("Testing GET methods", () => {
         });
     });
   });
-  describe.only("Testing GET methods for 'articles'", () => {
-    xtest("Sends the article containing the required information, which the client searched for using the ID.", () => {
+  xdescribe("Testing GET methods for 'articles'", () => {
+    test("Sends the article containing the required information, which the client searched for using the ID.", () => {
       const firstRequest = request(app)
         .get("/api/articles/1")
         .then(({ body: { article } }) => {
@@ -191,7 +191,7 @@ describe.only("Testing GET methods", () => {
         });
       return Promise.all([firstRequest]);
     });
-    xtest("Sends the comments of the article, which the client searched for using the ID.", () => {
+    test("Sends the comments of the article, which the client searched for using the ID.", () => {
       return request(app)
         .get("/api/articles/1/comments?sort_by=created_at&&order=desc")
         .then((res) => {
@@ -209,7 +209,7 @@ describe.only("Testing GET methods", () => {
           expect(typeof article).toBe("object");
         });
     });
-    test.only("Sends all the articles.", () => {
+    test("Sends all the articles.", () => {
       return request(app)
         .get("/api/articles/")
         .then(({ body: { articles } }) => {
@@ -346,6 +346,12 @@ describe.only("Testing GET methods", () => {
   });
 });
 
+describe("Testing DELETE methods", () => {
+  describe("Testing DELETE methods for 'comments'", () => {
+    test("should ", () => {});
+  });
+});
+
 // xdescribe("Testing PATCH methods", () => {
 //   describe.only("Testing PATCH methods for 'articles'", () => {
 //     test.only("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
@@ -368,4 +374,3 @@ describe.only("Testing GET methods", () => {
 // });
 
 // xdescribe("Testing POST methods", () => {});
-// xdescribe("Testing DELETE methods", () => {});
