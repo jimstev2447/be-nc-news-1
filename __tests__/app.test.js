@@ -309,7 +309,7 @@ xdescribe("Testing DELETE methods", () => {
   });
 });
 
-describe.only("Testing PATCH methods", () => {
+xdescribe("Testing PATCH methods", () => {
   describe("Testing PATCH methods for 'articles'", () => {
     test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
       return request(app)
@@ -329,8 +329,8 @@ describe.only("Testing PATCH methods", () => {
         });
     });
   });
-  describe.only("Testing PATCH methods for 'comments'", () => {
-    test.only("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
+  describe("Testing PATCH methods for 'comments'", () => {
+    test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
       return request(app)
         .patch("/api/comments/1")
         .send({ inc_votes: 10 })
