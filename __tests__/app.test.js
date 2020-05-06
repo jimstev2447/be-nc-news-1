@@ -349,12 +349,7 @@ xdescribe("Testing GET methods", () => {
 describe.only("Testing DELETE methods", () => {
   describe("Testing DELETE methods for 'comments'", () => {
     test("it deletes a comment according to ID ", () => {
-      return request(app)
-        .del("/api/comments/1")
-        .then(() => {
-          console.log("Test works");
-          expect().toBe();
-        });
+      return request(app).del("/api/comments/1").expect(204);
     });
   });
 });
