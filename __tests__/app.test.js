@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 afterAll(() => knex.destroy());
 
-describe("Testing GET methods", () => {
+describe.only("Testing GET methods", () => {
   describe("Testing GET methods for 'topics'", () => {
     test("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
       return request(app)
@@ -75,9 +75,9 @@ describe("Testing GET methods", () => {
         });
     });
   });
-  describe("Testing GET methods for 'articles'", () => {
+  describe.only("Testing GET methods for 'articles'", () => {
     test("Sends the article containing the required information, which the client searched for using the ID.", () => {
-      const firstRequest = request(app)
+      return request(app)
         .get("/api/articles/1")
         .then((res) => {
           return res;
@@ -94,39 +94,7 @@ describe("Testing GET methods", () => {
             comment_count: "13",
           });
           expect(typeof article).toBe("object");
-          expect(article).toHaveProperty("article_id");
-          expect(article).toHaveProperty("title");
-          expect(article).toHaveProperty("body");
-          expect(article).toHaveProperty("votes");
-          expect(article).toHaveProperty("topic");
-          expect(article).toHaveProperty("author");
-          expect(article).toHaveProperty("created_at");
-          expect(article).toHaveProperty("comment_count");
         });
-      const secondRequest = request(app)
-        .get("/api/articles/3")
-        .then(({ body: { article } }) => {
-          expect(article).toEqual({
-            article_id: 3,
-            title: "Eight pug gifs that remind me of mitch",
-            body: "some gifs",
-            votes: 0,
-            topic: "mitch",
-            author: "icellusedkars",
-            created_at: "2010-11-17T12:21:54.171Z",
-            comment_count: "0",
-          });
-          expect(typeof article).toBe("object");
-          expect(article).toHaveProperty("article_id");
-          expect(article).toHaveProperty("title");
-          expect(article).toHaveProperty("body");
-          expect(article).toHaveProperty("votes");
-          expect(article).toHaveProperty("topic");
-          expect(article).toHaveProperty("author");
-          expect(article).toHaveProperty("created_at");
-          expect(article).toHaveProperty("comment_count");
-        });
-      return Promise.all([firstRequest, secondRequest]);
     });
     test("Sends a 400 error when searching incorrectly for an article.", () => {
       return request(app).get("/api/articles/%!&%$").expect(400);

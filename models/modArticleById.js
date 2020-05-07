@@ -8,7 +8,11 @@ const modArticlerById = (article_id) => {
     .where("articles.article_id", "=", `${article_id}`)
     .groupBy("articles.article_id")
     .then(([article]) => {
-      return article;
+      if (article.title) {
+        return article;
+      } else {
+        return Promise.reject({ status: 404, message: "article not found" });
+      }
     });
 };
 
