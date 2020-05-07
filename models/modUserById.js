@@ -1,9 +1,8 @@
 const knex = require("../db/data/connection.js");
 
 const modUserById = (username) => {
-  return knex
+  return knex("users")
     .select("*")
-    .from("users")
     .where("users.username", "=", `${username}`)
     .then(([user]) => {
       if (!user) {
