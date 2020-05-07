@@ -9,7 +9,7 @@ beforeEach(() => {
 });
 afterAll(() => knex.destroy());
 
-describe.only("Testing GET methods", () => {
+describe("Testing GET methods", () => {
   describe("Testing GET methods for 'topics'", () => {
     test("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
       return request(app)
@@ -75,7 +75,7 @@ describe.only("Testing GET methods", () => {
         });
     });
   });
-  describe.only("Testing GET methods for 'articles'", () => {
+  describe("Testing GET methods for 'articles'", () => {
     test("Sends the article containing the required information, which the client searched for using the ID.", () => {
       return request(app)
         .get("/api/articles/1")
