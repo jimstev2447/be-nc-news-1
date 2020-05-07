@@ -3,7 +3,7 @@ const app = express();
 const apiRouter = require("./routes/apiRouter.js");
 const error404Handler = require("./errorHandlers/error404Handler.js");
 const error405Handler = require("./errorHandlers/error405Handler");
-const error505Handler = require("./errorHandlers/error505Handler");
+const error500Handler = require("./errorHandlers/error500Handler");
 const errorCustomHandler = require("./errorHandlers/errorCustomHandler");
 
 app.use(express.json());
@@ -16,6 +16,6 @@ app.use(error405Handler);
 
 app.use(errorCustomHandler);
 
-app.use(error505Handler);
+app.use(error500Handler);
 
 module.exports = app;

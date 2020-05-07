@@ -79,6 +79,9 @@ describe("Testing GET methods", () => {
     test("Sends the article containing the required information, which the client searched for using the ID.", () => {
       const firstRequest = request(app)
         .get("/api/articles/1")
+        .then((res) => {
+          return res;
+        })
         .then(({ body: { article } }) => {
           expect(article).toEqual({
             article_id: 1,
@@ -123,30 +126,10 @@ describe("Testing GET methods", () => {
           expect(article).toHaveProperty("created_at");
           expect(article).toHaveProperty("comment_count");
         });
-      const thirdRequest = request(app)
-        .get("/api/articles/7")
-        .then(({ body: { article } }) => {
-          expect(article).toEqual({
-            article_id: 7,
-            title: "Z",
-            body: "I was hungry.",
-            votes: 0,
-            topic: "mitch",
-            author: "icellusedkars",
-            created_at: "1994-11-21T12:21:54.171Z",
-            comment_count: "0",
-          });
-          expect(typeof article).toBe("object");
-          expect(article).toHaveProperty("article_id");
-          expect(article).toHaveProperty("title");
-          expect(article).toHaveProperty("body");
-          expect(article).toHaveProperty("votes");
-          expect(article).toHaveProperty("topic");
-          expect(article).toHaveProperty("author");
-          expect(article).toHaveProperty("created_at");
-          expect(article).toHaveProperty("comment_count");
-        });
-      return Promise.all([firstRequest, secondRequest, thirdRequest]);
+      return Promise.all([firstRequest, secondRequest]);
+    });
+    test("Sends a 400 error when searching incorrectly for an article.", () => {
+      return request(app).get("/api/articles/%!&%$").expect(400);
     });
     test("Sends the comments of the article, which the client searched for using the ID.", () => {
       return request(app)
@@ -297,7 +280,7 @@ describe("Testing GET methods", () => {
           expect(typeof articles).toBe("object");
         });
     });
-    test("Sends all the articles.", () => {
+    test("Send 404 errors when given a bad path for a request of all the articles.", () => {
       return request(app)
         .get("/api7^article$234s/")
         .expect(404)
@@ -313,12 +296,12 @@ describe("Testing DELETE methods", () => {
     test("it deletes a comment according to ID", () => {
       return request(app).del("/api/comments/1").expect(204);
     });
-    test("Sends a 405 error when using the wrong method", () => {
+    test("Sends a 500 error when using the wrong method", () => {
       return request(app)
         .del("/api/comments/9Ty9")
-        .expect(405)
+        .expect(500)
         .then(({ body: { message } }) => {
-          expect(message).toBe("Invalid method");
+          expect(message).toBe("Internal server error.");
         });
     });
     test("Sends a 404 error when given the wrong comment ID", () => {

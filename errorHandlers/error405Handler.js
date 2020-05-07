@@ -1,4 +1,4 @@
-const error405Handler = (err, req, res, next) => {
+const error405Handler = (req, res, next) => {
   res.status(405).send({ message: "Invalid method" });
 };
 
