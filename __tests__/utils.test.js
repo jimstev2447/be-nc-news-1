@@ -6,7 +6,7 @@ const {
   formatComments,
 } = require("../db/utils/utils");
 
-xdescribe("formatDates", () => {
+describe("formatDates", () => {
   test("returns an empty array, when passed an empty array", () => {
     const list = [];
     const actual = formatDates(list);
@@ -56,7 +56,7 @@ xdescribe("formatDates", () => {
   });
 });
 
-xdescribe("makeRefObj", () => {
+describe("makeRefObj", () => {
   test("returns an empty object, when passed an empty array", () => {
     const list = [];
     const actual = makeRefObj(list);
@@ -76,7 +76,7 @@ xdescribe("makeRefObj", () => {
   });
 });
 
-xdescribe("formatComments", () => {
+describe("formatComments", () => {
   test("returns an empty array, when passed an empty array", () => {
     const comments = [];
     const articleRef = {};
