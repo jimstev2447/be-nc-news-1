@@ -76,6 +76,23 @@ describe("Testing GET methods", () => {
     });
   });
   describe("Testing GET methods for 'articles'", () => {
+    test("pass in query", () => {
+      return request(app)
+        .get(
+          "/api/articles?sort_by=author&order=asc&author=icellusedkars&topic=cats"
+        )
+        .expect(200);
+    });
+    test("pass in non-existent author", () => {
+      return request(app).get("/api/articles?author=blah").expect(404);
+    });
+    test("pass in non-existent topic", () => {
+      return request(app).get("/api/articles?topic=blah").expect(404);
+    });
+    test("pass in topic that exists and has no articles", () => {
+      return request(app).get("/api/articles?topic=cats").expect(200);
+    });
+
     test("Sends the article containing the required information, which the client searched for using the ID.", () => {
       return request(app)
         .get("/api/articles/1")
@@ -99,9 +116,12 @@ describe("Testing GET methods", () => {
     test("Sends a 400 error when searching incorrectly for an article.", () => {
       return request(app).get("/api/articles/%!&%$").expect(400);
     });
+    test("Sends a 404 error when searching for a non-existent article.", () => {
+      return request(app).get("/api/articles/12312313").expect(404);
+    });
     test("Sends the comments of the article, which the client searched for using the ID.", () => {
       return request(app)
-        .get("/api/articles/1/comments?sort_by=created_at&&order=desc")
+        .get("/api/articles/1/comments")
         .then(({ body: { comments } }) => {
           expect(comments[0]).toEqual({
             comment_id: 2,
@@ -264,17 +284,9 @@ describe("Testing DELETE methods", () => {
     test("it deletes a comment according to ID", () => {
       return request(app).del("/api/comments/1").expect(204);
     });
-    test("Sends a 500 error when using the wrong method", () => {
-      return request(app)
-        .del("/api/comments/9Ty9")
-        .expect(500)
-        .then(({ body: { message } }) => {
-          expect(message).toBe("Internal server error.");
-        });
-    });
     test("Sends a 404 error when given the wrong comment ID", () => {
       return request(app)
-        .del("/api/commT&ts/9Ty9")
+        .del("/api/comments/9Ty9")
         .expect(404)
         .then(({ body: { message } }) => {
           expect(message).toBe("The request resource or route was not found.");
@@ -289,7 +301,7 @@ describe("Testing PATCH methods", () => {
       return request(app)
         .patch("/api/articles/1")
         .send({ inc_votes: 10 })
-        .expect(200)
+        .expect(201)
         .then(({ body: { article } }) => {
           expect(article).toEqual({
             article_id: 1,
@@ -308,7 +320,7 @@ describe("Testing PATCH methods", () => {
       return request(app)
         .patch("/api/comments/1")
         .send({ inc_votes: 10 })
-        .expect(200)
+        .expect(201)
         .then(({ body: { comment } }) => {
           expect(comment).toEqual({
             comment_id: 1,
@@ -320,6 +332,12 @@ describe("Testing PATCH methods", () => {
               "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
           });
         });
+    });
+    test("Failed to find patch on topics", () => {
+      return request(app)
+        .patch("/api/topics/")
+        .send({ inc_votes: 10 })
+        .expect(404);
     });
     test("Sends a 404 error when given the wrong information to patch", () => {
       return request(app)

@@ -1,3 +1,4 @@
+const error404Handler = require("../errorHandlers/error404Handler");
 const modDeleteCommentsById = require("../models/modDeleteCommentsById");
 
 const deleteCommentsById = (req, res, next) => {
@@ -12,7 +13,9 @@ const deleteCommentsById = (req, res, next) => {
         });
       res.status(204).send();
     })
-    .catch(next);
+    .catch((error) => {
+      error404Handler(req, res, next);
+    });
 };
 
 module.exports = deleteCommentsById;

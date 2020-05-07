@@ -1,6 +1,8 @@
 const modArticlerById = require("../models/modArticleById");
+const errorCustomHandler = require("../errorHandlers/errorCustomHandler");
 
-const getArticleById = ({ params }, res, next) => {
+const getArticleById = (req, res, next) => {
+  const { params } = req;
   const article_id = params["article_id"];
   if (typeof parseInt(article_id) !== "number") {
     next({ status: 400, message: "bad request" });
@@ -9,9 +11,8 @@ const getArticleById = ({ params }, res, next) => {
       .then((article) => {
         res.status(200).send({ article });
       })
-      .catch((err) => {
-        console.log(err);
-        next(err);
+      .catch((error) => {
+        errorCustomHandler(error, req, res, next);
       });
   }
 };

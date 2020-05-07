@@ -12,7 +12,8 @@ const patchArticleVoteById = (req, res, next) => {
   } else {
     modVoteArticleById(article_id, incVotes)
       .then((updatedArticle) => {
-        res.status(200).send({ article: updatedArticle });
+        const status = incVotes ? 201 : 200;
+        res.status(status).send({ article: updatedArticle });
       })
       .catch(next);
   }

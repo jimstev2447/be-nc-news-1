@@ -1,6 +1,8 @@
 const errorCustomHandler = (err, req, res, next) => {
-  if (err.status) res.status(err.status).send({ message: err.message });
-  else next(err);
+  if (err.status) {
+    console.log(`Hit custom error ${err.status}`);
+    return res.status(err.status).send({ message: err.message });
+  } else next();
 };
 
 module.exports = errorCustomHandler;

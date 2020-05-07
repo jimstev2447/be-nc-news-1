@@ -1,11 +1,14 @@
 const modSendAllArticles = require("../models/modSendAllArticles");
+const errorCustomHandler = require("../errorHandlers/errorCustomHandler");
 
 const getAllArticles = (req, res, next) => {
-  modSendAllArticles()
+  modSendAllArticles(req.query)
     .then((articles) => {
       res.status(200).send({ articles });
     })
-    .catch(next);
+    .catch((error) => {
+      errorCustomHandler(error, req, res, next);
+    });
 };
 
 module.exports = getAllArticles;

@@ -11,7 +11,8 @@ const patchCommentVoteById = (req, res, next) => {
   } else {
     modPatchCommentVoteById(comment_id, incVotes)
       .then((updatedComment) => {
-        res.status(200).send({ comment: updatedComment });
+        const status = incVotes ? 201 : 200;
+        res.status(status).send({ comment: updatedComment });
       })
       .catch(next);
   }
