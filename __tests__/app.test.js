@@ -14,6 +14,7 @@ describe("Testing GET methods", () => {
     test("Sends a response containing all topics to the user when it is passed the path '/api/topics/'. The response object contains the correct properties from the database.", () => {
       return request(app)
         .get("/api/topics/")
+        .expect(200)
         .then(({ body: { topics } }) => {
           topics.forEach((topic) => {
             expect(topic).toHaveProperty("slug");
@@ -36,6 +37,7 @@ describe("Testing GET methods", () => {
     test("Sends a response containing information about the user, which the client requested using the username.", () => {
       const firstRequest = request(app)
         .get("/api/users/rogersop")
+        .expect(200)
         .then(({ body: { user } }) => {
           expect(user).toEqual({
             username: "rogersop",
@@ -293,6 +295,14 @@ describe("Testing GET methods", () => {
             },
           ]);
           expect(typeof articles).toBe("object");
+        });
+    });
+    test("Sends all the articles.", () => {
+      return request(app)
+        .get("/api7^article$234s/")
+        .expect(404)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("The request resource or route was not found.");
         });
     });
   });
