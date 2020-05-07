@@ -6,7 +6,7 @@ const postCommentByArticleId = (req, res, next) => {
 
   modPostCommentByArticleId(article_id, body, username)
     .then((updatedComment) => {
-      res.send({ comment: updatedComment });
+      res.status(201).send({ comment: updatedComment });
     })
     .catch(next);
 };

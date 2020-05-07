@@ -374,7 +374,7 @@ describe("Testing POST methods", () => {
           body: "This works!",
           username: "butter_bridge",
         })
-        .expect(200)
+        .expect(201)
         .then(({ body: { comment } }) => {
           expect(comment[0]["author"]).toEqual("butter_bridge");
           expect(comment[0]["body"]).toEqual("This works!");
