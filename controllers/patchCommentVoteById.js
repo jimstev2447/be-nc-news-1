@@ -2,7 +2,7 @@ const modPatchCommentVoteById = require("../models/modPatchCommentVoteById");
 
 const patchCommentVoteById = (req, res, next) => {
   const comment_id = req.params.comment_id;
-  const incVotes = req.body.inc_votes;
+  const incVotes = req.body.inc_votes || 0;
   if (
     typeof parseInt(incVotes) !== "number" ||
     typeof parseInt(comment_id) !== "number"

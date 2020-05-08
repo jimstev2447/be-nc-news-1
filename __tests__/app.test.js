@@ -79,12 +79,20 @@ describe("Testing GET methods", () => {
     test("pass in query", () => {
       return request(app)
         .get(
-          "/api/articles?sort_by=author&order=asc&author=icellusedkars&topic=cats"
+          "/api/articles?sort_by=author&order=asc&author=icellusedkars&topic=mitch"
         )
         .expect(200);
     });
     test("pass in non-existent author", () => {
       return request(app).get("/api/articles?author=blah").expect(404);
+    });
+    test("it returns an empty array when searched for a topic or author that does exist, but the author did not write any articles", () => {
+      return request(app)
+        .get("/api/articles?author=lurker")
+        .expect(200)
+        .then((res) => {
+          expect(res.body.articles).toEqual([]);
+        });
     });
     test("pass in non-existent topic", () => {
       return request(app).get("/api/articles?topic=blah").expect(404);
@@ -135,6 +143,7 @@ describe("Testing GET methods", () => {
           expect(typeof comments[0]).toBe("object");
         });
     });
+
     test("Sends all the articles.", () => {
       return request(app)
         .get("/api/articles/")
@@ -286,7 +295,7 @@ describe("Testing DELETE methods", () => {
     });
     test("Sends a 404 error when given the wrong comment ID", () => {
       return request(app)
-        .del("/api/comments/9Ty9")
+        .del("/api/comments/10000")
         .expect(404)
         .then(({ body: { message } }) => {
           expect(message).toBe("The request resource or route was not found.");
@@ -333,12 +342,30 @@ describe("Testing PATCH methods", () => {
           });
         });
     });
+    test("It ignores a patch request with no information and sends back the comment with the same number of votes as before.", () => {
+      return request(app)
+        .patch("/api/comments/1")
+        .send({})
+        .expect(200)
+        .then(({ body: { comment } }) => {
+          expect(comment).toEqual({
+            comment_id: 1,
+            author: "butter_bridge",
+            article_id: 9,
+            votes: 16,
+            created_at: "2017-11-22T12:36:03.389Z",
+            body:
+              "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+          });
+        });
+    });
     test("Failed to find patch on topics", () => {
       return request(app)
         .patch("/api/topics/")
         .send({ inc_votes: 10 })
         .expect(404);
     });
+
     test("Sends a 404 error when given the wrong information to patch", () => {
       return request(app)
         .patch("/api/comment£ER/1")
@@ -364,6 +391,10 @@ describe("Testing POST methods", () => {
         .then(({ body: { comment } }) => {
           expect(comment[0]["author"]).toEqual("butter_bridge");
           expect(comment[0]["body"]).toEqual("This works!");
+          expect(comment[0]).toHaveProperty("comment_id");
+          expect(comment[0]).toHaveProperty("author");
+          expect(comment[0]).toHaveProperty("votes");
+          expect(comment[0]).toHaveProperty("created_at");
         });
     });
     test("Sends a 404 error when given the wrong information to post", () => {
@@ -376,6 +407,15 @@ describe("Testing POST methods", () => {
         .expect(404)
         .then(({ body: { message } }) => {
           expect(message).toBe("The request resource or route was not found.");
+        });
+    });
+    test("Sends a 400 error when given the wrong article ID", () => {
+      return request(app)
+        .post("/api/articles/U/comments")
+        .send({})
+        .expect(400)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("bad request");
         });
     });
   });

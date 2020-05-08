@@ -4,7 +4,7 @@
 
 Read through all errors. Note that any failing test could be caused by a problem uncovered in a previous test on the same endpoint.
 
-### PATCH `/api/topics` --- DONE ---------------------------------- PROPERLY DONE
+### PATCH `/api/topics` --- DONE COMPLETELY ---------------------------------- 
 
 Assertion: expected 404 to equal 405
 
@@ -12,7 +12,7 @@ Hints:
 - use `.all()` on each route, to serve a 405: Method Not Found status code
 
 
-### GET `/api/articles` -------- DONE --------- PROPERLY DONE
+### GET `/api/articles` -------- DONE COMPLETELY --------- 
 
 Assertion: the first article should have `article_id === 1`: expected 4 to equal 1
 
@@ -20,7 +20,7 @@ Hints:
 - the default sort should be by `created_at` and the default order should be `desc`
 
 
-### GET `/api/articles`-------- DONE ---------
+### GET `/api/articles`-------- DONE COMPLETELY ---------
 
 Assertion: The first article should have a comment count of `'13'`: expected '0' to equal '13'
 
@@ -31,7 +31,7 @@ Hints:
 - use `GROUP BY` to avoid duplicate rows
 
 
-### GET `/api/articles?sort_by=author`-------- DONE --------- SAME PROBLEM
+### GET `/api/articles?sort_by=author`-------- DONE COMPLETELY --------- 
 
 Assertion: expected 'icellusedkars' to equal 'rogersop'
 
@@ -40,7 +40,7 @@ Hints:
 - use `author` for the column to store the username that created the article
 
 
-### GET `/api/articles?order=asc` -------- DONE --------- SAME PROBLEM
+### GET `/api/articles?order=asc` -------- DONE COMPLETELY --------- 
 
 Assertion: expected 'Student SUES Mitch!' to equal 'Moustache'
 
@@ -48,7 +48,7 @@ Hints:
 - accept an `order` query of `asc` or `desc`
 
 
-### GET `/api/articles?author=butter_bridge`-------- DONE --------- SAME PROBLEM
+### GET `/api/articles?author=butter_bridge`-------- DONE COMPLETELY--------- 
 
 Assertion: all articles should be by the author in the query: expected [ Array(12) ] to satisfy [Function]
 
@@ -57,7 +57,7 @@ Hints:
 - use `where` in the model
 
 
-### GET `/api/articles?topic=mitch` -------- DONE --------- SAME PROBLEM
+### GET `/api/articles?topic=mitch` -------- DONE COMPLETELY --------- 
 
 Assertion: all articles should be by the topic in the query: expected [ Array(12) ] to satisfy [Function]
 
@@ -66,7 +66,7 @@ Hints:
 - use `where` in the model
 
 
-### GET `/api/articles?author=lurker` -------- DONE ---------
+### GET `/api/articles?author=lurker` -------- DONE COMPLETELY ---------
 
 Assertion: expected [ Array(12) ] to deeply equal []
 
@@ -75,7 +75,7 @@ Hints:
 - use a separate model to check whether the user exists
 
 
-### GET `/api/articles?topic=paper`------- DONE ----------  SAME PROBLEM
+### GET `/api/articles?topic=paper`------- DONE COMPLETELY---------- 
 
 Assertion: expected [ Array(12) ] to deeply equal []
 
@@ -84,7 +84,7 @@ Hints:
 - use a separate model to check whether the topic exists
 
 
-### GET `/api/articles?topic=not-a-topic`------- DONE ----------  SAME PROBLEM
+### GET `/api/articles?topic=not-a-topic`------- DONE COMPLETELY ----------  
 
 Assertion: expected 200 to equal 404
 
@@ -93,7 +93,7 @@ Hints:
 - use a separate model to check whether the topic exists
 
 
-### GET `/api/articles?author=not-an-author`------- DONE ----------  SAME PROBLEM
+### GET `/api/articles?author=not-an-author`------- DONE COMPLETELY----------  SAME PROBLEM
 
 Assertion: expected 200 to equal 404
 
@@ -102,7 +102,7 @@ Hints:
 - use a separate model to check whether the author exists
 
  
-### PATCH `/api/articles` --- DONE  ----------------------------------
+### PATCH `/api/articles` --- DONE COMPLETELY ----------------------------------
 
 Assertion: expected 404 to equal 405
 
@@ -110,7 +110,7 @@ Hints:
 - use `.all()` on each route, to serve a 405: Method Not Found status code
 
 
-### GET `/api/articles/1000` ------ HARD ---------
+### GET `/api/articles/1000` ------ DONE COMPLETELY ---------
 
 Assertion: expected 200 to equal 404
 
@@ -118,7 +118,7 @@ Hints:
 - if an article is not found with a valid `article_id`, use a 404: Not Found status code
 
 
-### GET `/api/articles/dog` ------ DONE ---------
+### GET `/api/articles/dog` ------ DONE COMPLETELY ---------
 
 Assertion: expected 405 to equal 400 
 
@@ -126,7 +126,7 @@ Hints:
 - if send an invalid `article_id`, use a 400: Bad Request status code
 
 
-### PUT `/api/articles/1` --- DONE  ----------------------------------
+### PUT `/api/articles/1` --- DONE COMPLETELY ----------------------------------
 
 Assertion: expected 404 to equal 405
 
@@ -134,7 +134,7 @@ Hints:
 - use `.all()` on each route, to serve a 405: Method Not Found status code
 
 
-### PATCH `/api/articles/1` -------- DONE ---------
+### PATCH `/api/articles/1` -------- DONE COMPLETELY---------
 
 Assertion: expected 101 to equal 100
 
@@ -143,7 +143,7 @@ Hints:
 - provide a default argument of `0` to the `increment` method, otherwise it will automatically increment by 1
 
 
-### PATCH `/api/articles/1` ----- DONE----
+### PATCH `/api/articles/1` ----- NEED TO LOOK INTO IT---- 
 
 Assertion: expected 405 to equal 400
 
@@ -151,7 +151,7 @@ Hints:
 - use a 400: Bad Request status code when sent an invalid `inc_votes` value
 
 
-### GET `/api/articles/1000/comments`
+### GET `/api/articles/1000/comments`----------- NEED TO LOOK INTO IT---- 
 
 Assertion: expected 200 to equal 404
 
@@ -159,7 +159,7 @@ Hints:
 - return 404: Not Found when given a valid `article_id` that does not exist
 
 
-### GET `/api/articles/not-a-valid-id/comments` ---------- DONE ------------
+### GET `/api/articles/not-a-valid-id/comments` ---------- DONE COMPLETELY ------------
 
 Assertion: expected 405 to equal 400
 
@@ -184,7 +184,7 @@ Hints:
 - use `.all()` on each route, to serve a 405: Method Not Found status code
 
 
-### POST `/api/articles/1/comments` --- DONE  ----------------------------------
+### POST `/api/articles/1/comments` --- DONE COMPLETELY ----------------------------------
 
 Assertion: expected 200 to equal 201
 
@@ -192,7 +192,7 @@ Hints:
 - use a 201: Created status code for a successful `POST` request
 
 
-### POST `/api/articles/1/comments` --- DONE  ----------------------------------
+### POST `/api/articles/1/comments` --- DONE COMPLETELY --------------- ----------------------------------
 
 Assertion: expected [ Array(1) ] to contain keys 'comment_id', 'author', 'body', 'votes', and 'created_at'
 
@@ -201,7 +201,7 @@ Hints:
 - ensure all columns in the comments table match the README
 
 
-### POST `/api/articles/1/comments`  ------------DONE ---------------
+### POST `/api/articles/1/comments`  ------------DONE COMPLETELY ---------------
 
 Assertion: expected undefined to equal 0
 
@@ -210,7 +210,7 @@ Hints:
 - default `created_at` to the current time in the migrations
 
 
-### POST `/api/articles/1/comments` ----------DONE-----------
+### POST `/api/articles/1/comments` ----------DONE COMPLETELY-----------
 
 Assertion: expected 200 to equal 400
 
@@ -219,7 +219,7 @@ Hints:
 - use `notNullable` in migrations for required columns
 
 
-### POST `/api/articles/10000/comments`
+### POST `/api/articles/10000/comments` ----------DONE COMPLETELY-----------
 
 Assertion: expected 405 to be one of [ 404, 422 ]
 
@@ -227,7 +227,7 @@ Hints:
 - use a 404: Not Found _OR_ 422: Unprocessable Entity status code when `POST` contains a valid article ID that does not exist
 
 
-### POST `/api/articles/not-a-valid-id/comments`----------DONE-----------
+### POST `/api/articles/not-a-valid-id/comments`----------DONE COMPLETELY-----------
 
 Assertion: expected 405 to equal 400
 
@@ -235,7 +235,7 @@ Hints:
 - use a 400: Bad Request when `POST` contains an invalid article_id
 
 
-### PATCH `/api/comments/1` ----------DONE-----------
+### PATCH `/api/comments/1` ----------DONE COMPLETELY-----------
 
 Assertion: expected 405 to equal 400
 
@@ -243,7 +243,7 @@ Hints:
 - use a 400: Bad Request status code when sent an invalid `inc_votes` value
 
 
-### PATCH `/api/comments/1` -------- HARD ---------
+### PATCH `/api/comments/1` -------- DONE COMPLETELY ---------
 
 Assertion: expected 17 to equal 16
 
@@ -252,7 +252,7 @@ Hints:
 - send an unchanged comment when no `inc_votes` is provided in the request body
 
 
-### PATCH `/api/comments/1000`
+### PATCH `/api/comments/1000`---------NEED TO LOOK INTO IT---------
 
 Assertion: expected 200 to equal 404
 
@@ -260,7 +260,7 @@ Hints:
 - use a 404: Not Found when `PATCH` contains a valid comment_id that does not exist
 
 
-### PATCH `/api/comments/not-a-valid-id`---------DONE---------
+### PATCH `/api/comments/not-a-valid-id`---------NEED TO LOOK INTO IT---------
 
 Assertion: expected 405 to equal 400
 
@@ -268,7 +268,7 @@ Hints:
 - use a 400: Bad Request when `PATCH` contains an invalid comment_id
 
 
-### PATCH `/api/comments/1`---------DONE---------
+### PATCH `/api/comments/1`---------NEED TO LOOK INTO IT---------
 
 Assertion: expected 405 to equal 400
 
@@ -284,7 +284,7 @@ Hints:
 - use `.all()` on each route, to serve a 405: Method Not Found status code
 
 
-### DELETE `/api/comments/1000` ---- DONE------
+### DELETE `/api/comments/1000` ---- DONE COMPLETELY------
 
 Assertion: expected 405 to equal 404
 
@@ -292,7 +292,7 @@ Hints:
 - use a 404: Not Found when `DELETE` contains a valid comment_id that does not exist
 
 
-### DELETE `/api/comments/not-a-number` ---- DONE------
+### DELETE `/api/comments/not-a-number` ---- NEED TO LOOK INTO IT------
 
 Assertion: expected 405 to equal 400
 
@@ -300,7 +300,7 @@ Hints:
 - use a 400: Bad Request when `DELETE` contains an invalid comment_id
 
 
-### GET `/api/users/not-a-username`
+### GET `/api/users/not-a-username`----- DONE COMPLETELY ------------------
 
 Assertion: expected 405 to equal 404
 
@@ -316,7 +316,7 @@ Hints:
 - use `.all()` on each route, to serve a 405: Method Not Found status code
 
 
-### DELETE `/api`--- DONE  ----------------------------------
+### DELETE `/api`--- NEED TO LOOK INTO IT  ----------------------------------
 
 Assertion: expected 404 to equal 405
 
