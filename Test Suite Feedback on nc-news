@@ -167,7 +167,7 @@ Hints:
 - return 400: Bad Request when given an invalid `article_id`
 
 
-### GET `/api/articles/1/comments?sort_by=not-a-valid-column`
+### GET `/api/articles/1/comments?sort_by=not-a-valid-column` ---------- DONE COMPLETELY ------------
 
 Assertion: expected 405 to be one of [ 200, 400 ]
 
@@ -176,7 +176,7 @@ Hints:
 - pick a consistent approach: ignore the invalid query, and use a 200 to serve up the articles with the default sort _OR_ use a 400 and provide a useful message to the client
 
 
-### PUT `/api/articles/1/comments`--- DONE  ----------------------------------
+### PUT `/api/articles/1/comments`--- DONE COMPLETELY ----------------------------------
 
 Assertion: expected 404 to equal 405 
 
@@ -252,7 +252,7 @@ Hints:
 - send an unchanged comment when no `inc_votes` is provided in the request body
 
 
-### PATCH `/api/comments/1000`---------NEED TO LOOK INTO IT---------
+### PATCH `/api/comments/1000`---------DONE COMPLETELY---------
 
 Assertion: expected 200 to equal 404
 
@@ -276,7 +276,7 @@ Hints:
 - use a 400: Bad Request status code when sent an invalid `inc_votes` value
 
 
-### PUT `/api/comments/1` --- DONE  ----------------------------------
+### PUT `/api/comments/1` --- DONE COMPLETELY ----------------------------------
 
 Assertion: expected 404 to equal 405
 
@@ -292,7 +292,7 @@ Hints:
 - use a 404: Not Found when `DELETE` contains a valid comment_id that does not exist
 
 
-### DELETE `/api/comments/not-a-number` ---- NEED TO LOOK INTO IT------
+### DELETE `/api/comments/not-a-number` ---- DONE COMPLETELY------
 
 Assertion: expected 405 to equal 400
 
@@ -308,7 +308,7 @@ Hints:
 - if a user is not found with a valid `user_id`, use a 404: Not Found status code
 
 
-### PUT `/api/users/butter_bridge` --- DONE  ----------------------------------
+### PUT `/api/users/butter_bridge` --- DONE COMPLETELY ----------------------------------
 
 Assertion: expected 404 to equal 405
 
@@ -316,7 +316,7 @@ Hints:
 - use `.all()` on each route, to serve a 405: Method Not Found status code
 
 
-### DELETE `/api`--- NEED TO LOOK INTO IT  ----------------------------------
+### DELETE `/api`--- DONE COMPLETELY  ----------------------------------
 
 Assertion: expected 404 to equal 405
 
