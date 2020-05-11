@@ -286,6 +286,11 @@ describe("Testing GET methods", () => {
         });
     });
   });
+  describe("Testing GET method for the endpoints", () => {
+    test("it returns the endpoints of the api server", () => {
+      return request(app).get("/api/").expect(200);
+    });
+  });
 });
 
 describe("Testing DELETE methods", () => {

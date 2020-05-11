@@ -6,7 +6,7 @@ const getAllArticles = require("../../controllers/getAllArticles.js");
 const postCommentByArticleId = require("../../controllers/postCommentByArticleId");
 const error405Handler = require("../../errorHandlers/error405Handler");
 
-articlesRouter.route("/").get(getAllArticles).all(error405Handler);
+articlesRouter.route("/").get(getAllArticles).all();
 articlesRouter
   .route("/:article_id")
   .get(getArticleById)
