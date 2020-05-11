@@ -310,7 +310,7 @@ describe("Testing PATCH methods", () => {
       return request(app)
         .patch("/api/articles/1")
         .send({ inc_votes: 10 })
-        .expect(201)
+        .expect(200)
         .then(({ body: { article } }) => {
           expect(article).toEqual({
             article_id: 1,
@@ -329,7 +329,7 @@ describe("Testing PATCH methods", () => {
       return request(app)
         .patch("/api/comments/1")
         .send({ inc_votes: 10 })
-        .expect(201)
+        .expect(200)
         .then(({ body: { comment } }) => {
           expect(comment).toEqual({
             comment_id: 1,
