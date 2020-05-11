@@ -323,6 +323,15 @@ describe("Testing PATCH methods", () => {
           });
         });
     });
+    test("Sends a 405 error.", () => {
+      return request(app)
+        .patch("/api/topics/")
+        .send({ inc_votes: 10 })
+        .expect(405)
+        .then((res) => {
+          expect(res.body.message).toBe("Invalid method");
+        });
+    });
   });
   describe("Testing PATCH methods for 'comments'", () => {
     test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
@@ -363,7 +372,7 @@ describe("Testing PATCH methods", () => {
       return request(app)
         .patch("/api/topics/")
         .send({ inc_votes: 10 })
-        .expect(404);
+        .expect(405);
     });
 
     test("Sends a 404 error when given the wrong information to patch", () => {
