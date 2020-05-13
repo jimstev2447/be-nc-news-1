@@ -7,11 +7,12 @@ const modCommentsByArticleId = (
 ) => {
   return knex("comments")
     .where("article_id", "=", article_id)
-    .orderBy(sort_by, order)
-    .returning("*")
-    .then((comments) => {
-      return comments;
-    });
+    .orderBy(sort_by, order);
+  // .select("*")
+  // .then((comments) => {
+  //   console.log(comments[0]);
+  //   return comments;
+  // })
 };
 
 module.exports = modCommentsByArticleId;

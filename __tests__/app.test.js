@@ -434,3 +434,142 @@ describe("Testing POST methods", () => {
     });
   });
 });
+
+describe("implementing feedback", () => {
+  describe("GET methods feedback", () => {
+    test("### GET `/api/articles/dog` to send a 400", () => {
+      return request(app)
+        .get("/api/articles/dog")
+        .expect(400)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Bad request.");
+        });
+    });
+    test("### GET `/api/articles?sort_by=not-a-column` to send a 400", () => {
+      return request(app)
+        .get("/api/articles?sort_by=not-a-column")
+        .expect(400)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Bad request.");
+        });
+    });
+    test("### GET `/api/articles/1000/comments` to send a 404", () => {
+      return request(app)
+        .get("/api/articles/1000/comments")
+        .expect(404)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("The request resource or route was not found.");
+        });
+    });
+    test("### GET `/api/articles/not-a-valid-id/comments` to send a 400", () => {
+      return request(app)
+        .get("/api/articles/not-a-valid-id/comments")
+        .expect(400)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Bad request.");
+        });
+    });
+    test("### GET `/api/articles/1/comments?sort_by=not-a-valid-column` to send a 400", () => {
+      return request(app)
+        .get("/api/articles/1/comments?sort_by=not-a-valid-column")
+        .expect(400)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Bad request.");
+        });
+    });
+  });
+  describe("PATCH methods feedback", () => {
+    test("### PATCH `/api/articles` to send a 405", () => {
+      return request(app)
+        .patch("/api/articles")
+        .expect(405)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Invalid method.");
+        });
+    });
+    test("### PATCH `/api/articles/1` to send a 400", () => {
+      return request(app)
+        .patch("/api/articles/1")
+        .expect(400)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Bad request.");
+        });
+    });
+    test("### PATCH `/api/comments/1` to send a 400", () => {
+      return request(app)
+        .patch("/api/comments/1")
+        .expect(400)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Bad request.");
+        });
+    });
+    test("### PATCH `/api/comments/1000` to send a 404", () => {
+      return request(app)
+        .patch("/api/comments/1000")
+        .expect(404)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Resource or path not found.");
+        });
+    });
+    test("### PATCH `/api/comments/not-a-valid-id` to send a 400", () => {
+      return request(app)
+        .patch("/api/comments/not-a-valid-id")
+        .expect(400)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Bad request.");
+        });
+    });
+  });
+  describe("PUT methods feedback", () => {
+    test("### PUT `/api/articles/1` to send back a 405", () => {
+      return request(app)
+        .put("/api/articles/1")
+        .expect(405)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Invalid method.");
+        });
+    });
+    test("### PUT `/api/articles/1/comments` to send back a 405", () => {
+      return request(app)
+        .put("/api/articles/1/comments")
+        .expect(405)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Invalid method.");
+        });
+    });
+    test("### PUT `/api/comments/1` to send back a 405", () => {
+      return request(app)
+        .put("/api/comments/1")
+        .expect(405)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Invalid method.");
+        });
+    });
+    test("### PUT `/api/users/butter_bridge` to send back a 405", () => {
+      return request(app)
+        .put("/api/users/butter_bridge")
+        .expect(405)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Invalid method.");
+        });
+    });
+  });
+  describe("DELETE methods feedback", () => {
+    test("### DELETE `/api/comments/not-a-number` to send back a 400", () => {
+      return request(app)
+        .delete("/api/articles/1")
+        .expect(400)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Bad request.");
+        });
+    });
+    test("### DELETE `/api` to send back a 405", () => {
+      return request(app)
+        .delete("/api")
+        .expect(405)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("Invalid method.");
+        });
+    });
+  });
+});
