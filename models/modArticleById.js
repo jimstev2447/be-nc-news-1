@@ -1,6 +1,6 @@
 const knex = require("../db/data/connection.js");
 
-const modArticlerById = (article_id) => {
+const modArticleById = (article_id) => {
   return knex("articles")
     .select("articles.*")
     .count({ comment_count: "comment_id" })
@@ -16,4 +16,4 @@ const modArticlerById = (article_id) => {
     });
 };
 
-module.exports = modArticlerById;
+module.exports = modArticleById;

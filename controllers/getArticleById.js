@@ -1,4 +1,4 @@
-const modArticlerById = require("../models/modArticleById");
+const modArticleById = require("../models/modArticleById");
 const errorCustomHandler = require("../errorHandlers/errorCustomHandler");
 
 const getArticleById = (req, res, next) => {
@@ -7,7 +7,7 @@ const getArticleById = (req, res, next) => {
   if (typeof parseInt(article_id) !== "number") {
     next({ status: 400, message: "bad request" });
   } else {
-    modArticlerById(article_id)
+    modArticleById(article_id)
       .then((article) => {
         res.status(200).send({ article });
       })
