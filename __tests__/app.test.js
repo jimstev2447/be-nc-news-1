@@ -308,7 +308,7 @@ describe("Testing DELETE methods", () => {
         .del("/api/comments/10000")
         .expect(404)
         .then(({ body: { message } }) => {
-          expect(message).toBe("The request resource or route was not found.");
+          expect(message).toBe("Comment not found.");
         });
     });
   });
@@ -467,7 +467,7 @@ describe("implementing feedback", () => {
           expect(message).toBe("article not found");
         });
     });
-    xtest("### GET `/api/articles/not-a-valid-id/comments` to send a 400", () => {
+    test("### GET `/api/articles/not-a-valid-id/comments` to send a 400", () => {
       return request(app)
         .get("/api/articles/not-a-valid-id/comments")
         .expect(400)
@@ -475,7 +475,7 @@ describe("implementing feedback", () => {
           expect(message).toBe("bad request");
         });
     });
-    xtest("### GET `/api/articles/1/comments?sort_by=not-a-valid-column` to send a 400", () => {
+    test("### GET `/api/articles/1/comments?sort_by=not-a-valid-column` to send a 400", () => {
       return request(app)
         .get("/api/articles/1/comments?sort_by=not-a-valid-column")
         .expect(400)
@@ -497,6 +497,7 @@ describe("implementing feedback", () => {
     test("### PATCH `/api/articles/1` to send a 400", () => {
       return request(app)
         .patch("/api/articles/1")
+        .send({ inc_votes: "up" })
         .expect(400)
         .then(({ body: { message } }) => {
           expect(message).toBe("bad request");
@@ -505,6 +506,7 @@ describe("implementing feedback", () => {
     test("### PATCH `/api/comments/1` to send a 400", () => {
       return request(app)
         .patch("/api/comments/1")
+        .send({ inc_votes: "up" })
         .expect(400)
         .then(({ body: { message } }) => {
           expect(message).toBe("bad request");
@@ -513,6 +515,7 @@ describe("implementing feedback", () => {
     test("### PATCH `/api/comments/1000` to send a 404", () => {
       return request(app)
         .patch("/api/comments/1000")
+        .send({ inc_votes: 10 })
         .expect(404)
         .then(({ body: { message } }) => {
           expect(message).toBe("Resource or path not found.");

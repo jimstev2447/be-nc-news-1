@@ -6,16 +6,9 @@ const deleteCommentsById = (req, res, next) => {
 
   modDeleteCommentsById(comment_id)
     .then((delCount) => {
-      if (delCount === 0)
-        return Promise.reject({
-          status: 404,
-          message: "Comment was not found.",
-        });
       res.status(204).send();
     })
-    .catch((error) => {
-      error404Handler(req, res, next);
-    });
+    .catch(next);
 };
 
 module.exports = deleteCommentsById;

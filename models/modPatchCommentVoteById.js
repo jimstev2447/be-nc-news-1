@@ -5,8 +5,15 @@ const modPatchCommentVoteById = (comment_id, incVotes = 0) => {
     .increment("votes", incVotes)
     .where("comments.comment_id", "=", comment_id)
     .returning("*")
-    .then(([comment]) => {
-      return comment;
+    .then((comments) => {
+      if (comments.length === 0) {
+        return Promise.reject({
+          status: 404,
+          message: "Resource or path not found.",
+        });
+      } else {
+        return comments[0];
+      }
     });
 };
 

@@ -11,14 +11,6 @@ const modCommentsByArticleId = (
     .select("*")
     .then((comments) => {
       return comments;
-      // if (comments.length !== 0) {
-      //   return comments;
-      // } else {
-      //   return Promise.reject({
-      //     status: 404,
-      //     message: "The request resource or route was not found.",
-      //   });
-      // }
     });
 };
 
