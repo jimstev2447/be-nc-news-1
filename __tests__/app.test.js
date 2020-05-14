@@ -567,7 +567,7 @@ describe("implementing feedback", () => {
   describe("DELETE methods feedback", () => {
     test("### DELETE `/api/comments/not-a-number` to send back a 400", () => {
       return request(app)
-        .delete("/api/articles/1")
+        .delete("/api/comments/not-a-number")
         .expect(400)
         .then(({ body: { message } }) => {
           expect(message).toBe("bad request");
