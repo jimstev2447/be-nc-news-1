@@ -84,7 +84,12 @@ describe("Testing GET methods", () => {
         .expect(200);
     });
     test("pass in non-existent author", () => {
-      return request(app).get("/api/articles?author=blah").expect(404);
+      return request(app)
+        .get("/api/articles?author=blah")
+        .expect(404)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("author not found");
+        });
     });
     test("it returns an empty array when searched for a topic or author that does exist, but the author did not write any articles", () => {
       return request(app)
@@ -446,20 +451,20 @@ describe("implementing feedback", () => {
         });
     });
 
-    xtest("### GET `/api/articles?sort_by=not-a-column` to send a 400", () => {
+    test("### GET `/api/articles?sort_by=not-a-column` to send a 400 or a 200", () => {
       return request(app)
         .get("/api/articles?sort_by=not-a-column")
-        .expect(400)
-        .then(({ body: { message } }) => {
-          expect(message).toBe("bad request");
+        .expect(200)
+        .then(({ body: { articles } }) => {
+          expect(Array.isArray(articles)).toBe(true);
         });
     });
-    xtest("### GET `/api/articles/1000/comments` to send a 404", () => {
+    test("### GET `/api/articles/1000/comments` to send a 404", () => {
       return request(app)
         .get("/api/articles/1000/comments")
         .expect(404)
         .then(({ body: { message } }) => {
-          expect(message).toBe("The request resource or route was not found.");
+          expect(message).toBe("article not found");
         });
     });
     xtest("### GET `/api/articles/not-a-valid-id/comments` to send a 400", () => {
@@ -480,7 +485,7 @@ describe("implementing feedback", () => {
     });
   });
 
-  xdescribe("PATCH methods feedback", () => {
+  describe("PATCH methods feedback", () => {
     test("### PATCH `/api/articles` to send a 405", () => {
       return request(app)
         .patch("/api/articles")

@@ -1,5 +1,5 @@
 const modArticleById = require("../models/modArticleById");
-const errorCustomHandler = require("../errorHandlers/errorCustomHandler");
+// const errorCustomHandler = require("../errorHandlers/errorCustomHandler");
 
 const getArticleById = (req, res, next) => {
   const { params } = req;
@@ -12,8 +12,10 @@ const getArticleById = (req, res, next) => {
     .then((article) => {
       res.status(200).send({ article });
     })
+    // .catch(next); <----this won't work
     .catch((error) => {
-      errorCustomHandler(error, req, res, next);
+      next(error);
+      // errorCustomHandler(error, req, res, next); <---- line 17 and 18 will work as well
     });
 };
 //};

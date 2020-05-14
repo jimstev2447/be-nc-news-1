@@ -1,8 +1,5 @@
 const error405Handler = (req, res, next) => {
-  if (!res.statusCode) {
-    res.status(405).send({ message: "Invalid method" });
-  }
-  next();
+  res.status(405).send({ message: "Invalid method" });
 };
 
 module.exports = error405Handler;

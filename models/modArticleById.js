@@ -11,7 +11,6 @@ const modArticleById = (article_id) => {
       if (articles.length !== 0) {
         return articles[0];
       } else {
-        console.log("testing");
         return Promise.reject({ status: 404, message: "article not found" });
       }
     });

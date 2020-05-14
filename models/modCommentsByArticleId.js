@@ -7,12 +7,19 @@ const modCommentsByArticleId = (
 ) => {
   return knex("comments")
     .where("article_id", "=", article_id)
-    .orderBy(sort_by, order);
-  // .select("*")
-  // .then((comments) => {
-  //   console.log(comments[0]);
-  //   return comments;
-  // })
+    .orderBy(sort_by, order)
+    .select("*")
+    .then((comments) => {
+      return comments;
+      // if (comments.length !== 0) {
+      //   return comments;
+      // } else {
+      //   return Promise.reject({
+      //     status: 404,
+      //     message: "The request resource or route was not found.",
+      //   });
+      // }
+    });
 };
 
 module.exports = modCommentsByArticleId;
