@@ -491,7 +491,7 @@ describe("implementing feedback", () => {
         .patch("/api/articles")
         .expect(405)
         .then(({ body: { message } }) => {
-          expect(message).toBe("Invalid method.");
+          expect(message).toBe("Invalid method");
         });
     });
     test("### PATCH `/api/articles/1` to send a 400", () => {
@@ -527,13 +527,13 @@ describe("implementing feedback", () => {
         });
     });
   });
-  xdescribe("PUT methods feedback", () => {
+  describe("PUT methods feedback", () => {
     test("### PUT `/api/articles/1` to send back a 405", () => {
       return request(app)
         .put("/api/articles/1")
         .expect(405)
         .then(({ body: { message } }) => {
-          expect(message).toBe("Invalid method.");
+          expect(message).toBe("Invalid method");
         });
     });
     test("### PUT `/api/articles/1/comments` to send back a 405", () => {
@@ -541,7 +541,7 @@ describe("implementing feedback", () => {
         .put("/api/articles/1/comments")
         .expect(405)
         .then(({ body: { message } }) => {
-          expect(message).toBe("Invalid method.");
+          expect(message).toBe("Invalid method");
         });
     });
     test("### PUT `/api/comments/1` to send back a 405", () => {
@@ -549,7 +549,7 @@ describe("implementing feedback", () => {
         .put("/api/comments/1")
         .expect(405)
         .then(({ body: { message } }) => {
-          expect(message).toBe("Invalid method.");
+          expect(message).toBe("Invalid method");
         });
     });
     test("### PUT `/api/users/butter_bridge` to send back a 405", () => {
@@ -557,11 +557,11 @@ describe("implementing feedback", () => {
         .put("/api/users/butter_bridge")
         .expect(405)
         .then(({ body: { message } }) => {
-          expect(message).toBe("Invalid method.");
+          expect(message).toBe("Invalid method");
         });
     });
   });
-  xdescribe("DELETE methods feedback", () => {
+  describe("DELETE methods feedback", () => {
     test("### DELETE `/api/comments/not-a-number` to send back a 400", () => {
       return request(app)
         .delete("/api/articles/1")
@@ -575,7 +575,7 @@ describe("implementing feedback", () => {
         .delete("/api")
         .expect(405)
         .then(({ body: { message } }) => {
-          expect(message).toBe("Invalid method.");
+          expect(message).toBe("Invalid method");
         });
     });
   });

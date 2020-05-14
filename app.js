@@ -8,7 +8,7 @@ const errorCustomHandler = require("./errorHandlers/errorCustomHandler");
 
 app.use(express.json());
 
-app.use("/api", apiRouter);
+app.use("/api", apiRouter).all(error405Handler);
 
 app.use(error404Handler);
 
