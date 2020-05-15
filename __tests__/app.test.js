@@ -563,6 +563,20 @@ describe("implementing feedback", () => {
         });
     });
   });
+  describe("POST methods feedback", () => {
+    test("Sends a 422 error when given the wrong article ID", () => {
+      return request(app)
+        .post("/api/articles/100000/comments")
+        .send({
+          body: "This works!",
+          username: "butter_bridge",
+        })
+        .expect(422)
+        .then(({ body: { message } }) => {
+          expect(message).toBe("unprocessable entity");
+        });
+    });
+  });
   describe("DELETE methods feedback", () => {
     test("### DELETE `/api/comments/not-a-number` to send back a 400", () => {
       return request(app)

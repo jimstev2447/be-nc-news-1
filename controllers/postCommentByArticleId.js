@@ -10,7 +10,14 @@ const postCommentByArticleId = (req, res, next) => {
       .then((updatedComment) => {
         res.status(201).send({ comment: updatedComment });
       })
-      .catch(next);
+      .catch((err) => {
+        console.log(err);
+        if (err.code === "23503") {
+          next({ status: 422, message: "unprocessable entity" });
+        } else {
+          next();
+        }
+      });
   }
 };
 
