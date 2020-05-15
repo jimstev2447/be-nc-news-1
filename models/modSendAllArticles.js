@@ -10,19 +10,16 @@ const sendAllArticles = async (query) => {
       : "created_at";
 
   const authors = await knex("users").select("users.username");
-  const topics = await knex("topics").select("topics.slug");
   const authorNames = authors.map((author) => {
     return author.username;
   });
-
-  const topicSlugs = topics.map((topic) => {
-    return topic.slug;
-  });
-
   if (author && !authorNames.includes(author)) {
     return Promise.reject({ status: 404, message: "author not found" });
   }
-
+  const topics = await knex("topics").select("topics.slug");
+  const topicSlugs = topics.map((topic) => {
+    return topic.slug;
+  });
   if (topic && !topicSlugs.includes(topic)) {
     return Promise.reject({ status: 404, message: "topic not found" });
   }
