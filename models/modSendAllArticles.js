@@ -3,11 +3,11 @@ const knex = require("../db/data/connection.js");
 const sendAllArticles = async (query) => {
   const { sort_by, order, author, topic } = query;
 
-  const dataOrder = order ? order : "desc";
   const dataSort =
     sort_by === "title" || sort_by === "author" || sort_by === "topic"
       ? sort_by
       : "created_at";
+  const dataOrder = order ? order : "desc";
 
   const authors = await knex("users").select("users.username");
   const authorNames = authors.map((author) => {
