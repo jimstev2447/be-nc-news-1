@@ -5,13 +5,13 @@ const articlesRouter = require("./articlesRouter/articlesRouter.js");
 const commentsRouter = require("./commentsRouter/commentsRouter.js");
 const error405Handler = require("../errorHandlers/error405Handler");
 
-apiRouter.use("/topics", topicsRouter).all(error405Handler);
+apiRouter.use("/topics", topicsRouter);
 
-apiRouter.use("/users", usersRouter).all(error405Handler);
+apiRouter.use("/users", usersRouter);
 
-apiRouter.use("/articles", articlesRouter).all(error405Handler);
+apiRouter.use("/articles", articlesRouter);
 
-apiRouter.use("/comments", commentsRouter).all(error405Handler);
+apiRouter.use("/comments", commentsRouter);
 
 apiRouter
   .get("/", (req, res, next) => {
