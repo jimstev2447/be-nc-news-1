@@ -425,12 +425,12 @@ describe("Testing POST methods", () => {
         })
         .expect(201)
         .then(({ body: { comment } }) => {
-          expect(comment[0]["author"]).toEqual("butter_bridge");
-          expect(comment[0]["body"]).toEqual("This works!");
-          expect(comment[0]).toHaveProperty("comment_id");
-          expect(comment[0]).toHaveProperty("author");
-          expect(comment[0]).toHaveProperty("votes");
-          expect(comment[0]).toHaveProperty("created_at");
+          expect(comment["author"]).toEqual("butter_bridge");
+          expect(comment["body"]).toEqual("This works!");
+          expect(comment).toHaveProperty("comment_id");
+          expect(comment).toHaveProperty("author");
+          expect(comment).toHaveProperty("votes");
+          expect(comment).toHaveProperty("created_at");
         });
     });
     test("Sends a 404 error when given the wrong information to post", () => {

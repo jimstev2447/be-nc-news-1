@@ -7,7 +7,7 @@ const postCommentByArticleId = (req, res, next) => {
     next({ status: 400, message: "bad request" });
   } else {
     modPostCommentByArticleId(article_id, body, username)
-      .then((updatedComment) => {
+      .then(([updatedComment]) => {
         res.status(201).send({ comment: updatedComment });
       })
       .catch((err) => {
