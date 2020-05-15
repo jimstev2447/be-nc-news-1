@@ -484,7 +484,6 @@ describe("implementing feedback", () => {
         });
     });
   });
-
   describe("PATCH methods feedback", () => {
     test("### PATCH `/api/articles` to send a 405", () => {
       return request(app)
