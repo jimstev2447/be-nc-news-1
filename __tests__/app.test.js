@@ -333,6 +333,23 @@ describe("Testing PATCH methods", () => {
           });
         });
     });
+    test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
+      return request(app)
+        .patch("/api/articles/1")
+        .send({})
+        .expect(200)
+        .then(({ body: { article } }) => {
+          expect(article).toEqual({
+            article_id: 1,
+            title: "Living in the shadow of a great man",
+            body: "I find this existence challenging",
+            votes: 100,
+            topic: "mitch",
+            author: "butter_bridge",
+            created_at: "2018-11-15T12:21:54.171Z",
+          });
+        });
+    });
     test("Sends a 405 error.", () => {
       return request(app)
         .patch("/api/topics/")
