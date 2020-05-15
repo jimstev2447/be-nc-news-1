@@ -7,8 +7,8 @@ const getCommentsByArticleId = (req, res, next) => {
   const order = req.query.order;
 
   if (
-    typeof parseInt(article_id) !== "number" ||
-    sort_by == "not-a-valid-column"
+    typeof parseInt(article_id) !== "number"
+    // ||sort_by == "not-a-valid-column"
   ) {
     next({ status: 400, message: "bad request" });
   } else {

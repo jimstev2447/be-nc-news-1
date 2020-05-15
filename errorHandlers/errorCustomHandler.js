@@ -1,5 +1,5 @@
 const errorCustomHandler = (err, req, res, next) => {
-  const psqlErrors = ["22P02"];
+  const psqlErrors = ["22P02", "42703"];
   if (psqlErrors.includes(err.code)) {
     res.status(400).send({ status: 400, message: "bad request" });
   }
