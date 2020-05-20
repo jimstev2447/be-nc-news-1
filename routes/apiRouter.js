@@ -14,7 +14,8 @@ apiRouter.use("/articles", articlesRouter);
 apiRouter.use("/comments", commentsRouter);
 
 apiRouter
-  .get("/", (req, res, next) => {
+  .route("/")
+  .get((req, res, next) => {
     res.send({
       "GET /api": {
         description:
