@@ -1,4 +1,4 @@
-const knex = require("../../be-nc-news/db/data/connection");
+const knex = require("../db/data/connection");
 
 const modCommentsByArticleId = (
   article_id,
