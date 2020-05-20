@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   /*
-  This function will create the 'topics' table
+  This function will create the 'topics'
   which is the table in the database that all other
   tables reference. It has the columns 'slug' as a primary key and 'description.' 
   */
