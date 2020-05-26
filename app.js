@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const apiRouter = require("./routes/apiRouter.js");
 const error404Handler = require("./errorHandlers/error404Handler");
 const error405Handler = require("./errorHandlers/error405Handler");
 const error500Handler = require("./errorHandlers/error500Handler");
 const errorCustomHandler = require("./errorHandlers/errorCustomHandler");
+
+app.use(cors());
 
 app.use(express.json());
 
