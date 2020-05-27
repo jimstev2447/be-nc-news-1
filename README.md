@@ -8,6 +8,8 @@ To use this API on your computer, you must first fork it then clone it down by u
 
 Once you have a copy of the folder on your computer, make sure to install the necessary dependancies needed in order for the API to run. A quick command to do this is `npm install`.
 
+To start the API use the command `npm start` which will start it listening by default on port 9090. If you need to reset the database it at any point you can use the command `npm run setup-dbs` and to re-seed it you should use the command `npm run seed-dev`.
+
 ## Using the test suites
 
 This project comes with pre-written tests written using the Jest testing framework. If you wish to run these then you can type in the command `npm t` which will bring the option of test suites to run or alternatively you can run all of them.
