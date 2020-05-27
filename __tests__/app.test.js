@@ -390,6 +390,24 @@ describe("Testing PATCH methods", () => {
           });
         });
     });
+    test("Decrements the number of votes that an article has, which the client searched for using the ID.", () => {
+      return request(app)
+        .patch("/api/articles/1")
+        .send({ inc_votes: -10 })
+        .expect(200)
+        .then(({ body: { article } }) => {
+          expect(article).toEqual({
+            article_id: 1,
+            title: "Living in the shadow of a great man",
+            body: "I find this existence challenging",
+            votes: 90,
+            topic: "mitch",
+            author: "butter_bridge",
+            created_at: "2018-11-15T12:21:54.171Z",
+          });
+        });
+    });
+
     test("Updates the number of votes that an article has, which the client searched for using the ID.", () => {
       return request(app)
         .patch("/api/articles/1")
@@ -446,6 +464,23 @@ describe("Testing PATCH methods", () => {
             author: "butter_bridge",
             article_id: 9,
             votes: 26,
+            created_at: "2017-11-22T12:36:03.389Z",
+            body:
+              "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+          });
+        });
+    });
+    test("Decrements the number of votes that an article has, which the client searched for using the ID.", () => {
+      return request(app)
+        .patch("/api/comments/1")
+        .send({ inc_votes: -3 })
+        .expect(200)
+        .then(({ body: { comment } }) => {
+          expect(comment).toEqual({
+            comment_id: 1,
+            author: "butter_bridge",
+            article_id: 9,
+            votes: 13,
             created_at: "2017-11-22T12:36:03.389Z",
             body:
               "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
