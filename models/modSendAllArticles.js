@@ -4,7 +4,11 @@ const sendAllArticles = async (query) => {
   const { sort_by, order, author, topic } = query;
 
   const dataSort =
-    sort_by === "title" || sort_by === "author" || sort_by === "topic"
+    sort_by === "title" ||
+    sort_by === "author" ||
+    sort_by === "topic" ||
+    sort_by === "comment_count" ||
+    sort_by === "votes"
       ? sort_by
       : "created_at";
   const dataOrder = order ? order : "desc";
