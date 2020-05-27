@@ -119,7 +119,7 @@ apiRouter
         },
       },
       "DELETE /api/comments/:comment_id": {
-        description: "Deletes a comment by the comment ID.",
+        description: "Deletes a comment using the comment ID.",
       },
     });
   })
