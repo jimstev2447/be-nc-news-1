@@ -22,7 +22,7 @@ A list of the available endpoints which the API responds to is available on the 
 
 The following frameworks were used in this project:
 
-• [Express](https://expressjs.com/) - API framework;
-• [Knex](http://knexjs.org/) - SQL query builder;
-• [PostgreSQL](https://www.postgresql.org/) - database;
-• [Jest](https://jestjs.io/) - testing framework
+- [Express](https://expressjs.com/) - API framework;
+- [Knex](http://knexjs.org/) - SQL query builder;
+- [PostgreSQL](https://www.postgresql.org/) - database;
+- [Jest](https://jestjs.io/) - testing framework
